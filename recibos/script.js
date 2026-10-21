@@ -1,5 +1,6 @@
 /* =======================================================
    ARQUIVO: script.js (RECIBOS)
+   Totalmente Padronizado (Material Icons e UI Unificada)
    ======================================================= */
 
 const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyOZweQZtsb0rJYXDoX7HL0tFG3dO8ZO02pu_yhhS0guV_5d4Q_fIRnPs_Y64GyklrNQA/exec";
@@ -51,16 +52,54 @@ let htmlBlocos = "";
 for(let i=1; i<=5; i++) {
     htmlBlocos += `
     <div class="item-block" id="bloco_item_${i}" style="display: ${i===1?'block':'none'};">
-        <div class="item-block-title"><span class="badge">${i}</span> Serviço 0${i} ${i>1 ? `<button type="button" class="close-btn" onclick="fecharItem(${i})"><i class="fas fa-times"></i></button>` : ''}</div>
-        <div class="form-row">
-            <div class="form-group" style="flex: 2;"><label>Serviço ${i===1?'*':''}</label><select id="item_${i}_servico_select" onchange="toggleOutro('item_${i}_servico')" ${i===1?'required':''}><option value="">Selecione...</option><option value="Desinsetização">Desinsetização</option><option value="Desinsetização e Desratização">Desinsetização e Desratização</option><option value="Descupinização">Descupinização</option><option value="Limpeza de Reservatórios">Limpeza de Reservatórios</option><option value="Outro">Outro...</option></select><input type="text" id="item_${i}_servico_outro" style="display:none; margin-top:8px;" placeholder="Digite o serviço"></div>
-            <div class="form-group" style="flex: 1;"><label>Data Execução</label><input type="date" id="item_${i}_data"></div>
+        <div class="item-block-title">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge">${i}</span> Serviço 0${i}
+            </div>
+            ${i>1 ? `<button type="button" class="close-btn" onclick="fecharItem(${i})"><span class="material-icons" style="font-size:18px;">close</span></button>` : ''}
         </div>
         <div class="form-row">
-            <div class="form-group" style="flex: 2;"><label>Local ${i===1?'*':''}</label><input type="text" id="item_${i}_local" ${i===1?'required':''} placeholder="Onde foi executado?"></div>
-            <div class="form-group" style="flex: 1;"><label>Garantia</label><select id="item_${i}_garantia_select" onchange="toggleOutro('item_${i}_garantia')"><option value="">Nenhuma</option><option value="30 dias">30 dias</option><option value="60 dias">60 dias</option><option value="90 dias">90 dias</option><option value="180 dias">180 dias</option><option value="Outro">Outro...</option></select><input type="text" id="item_${i}_garantia_outro" style="display:none; margin-top:8px;" placeholder="Digite a garantia"></div>
+            <div class="form-group" style="flex: 2;">
+                <label class="title-label">Serviço ${i===1?'*':''}</label>
+                <select id="item_${i}_servico_select" class="form-input" onchange="toggleOutro('item_${i}_servico')" ${i===1?'required':''}>
+                    <option value="">Selecione...</option>
+                    <option value="Desinsetização">Desinsetização</option>
+                    <option value="Desinsetização e Desratização">Desinsetização e Desratização</option>
+                    <option value="Descupinização">Descupinização</option>
+                    <option value="Limpeza de Reservatórios">Limpeza de Reservatórios</option>
+                    <option value="Outro">Outro...</option>
+                </select>
+                <input type="text" id="item_${i}_servico_outro" class="form-input" style="display:none; margin-top:8px;" placeholder="Digite o serviço">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label class="title-label">Data Execução</label>
+                <input type="date" id="item_${i}_data" class="form-input">
+            </div>
         </div>
-        <div class="form-row"><div class="form-group"><label>Valor Discriminado</label><input type="text" id="item_${i}_valor" placeholder="Opcional"></div></div>
+        <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+                <label class="title-label">Local ${i===1?'*':''}</label>
+                <input type="text" id="item_${i}_local" class="form-input" ${i===1?'required':''} placeholder="Onde foi executado?">
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label class="title-label">Garantia</label>
+                <select id="item_${i}_garantia_select" class="form-input" onchange="toggleOutro('item_${i}_garantia')">
+                    <option value="">Nenhuma</option>
+                    <option value="30 dias">30 dias</option>
+                    <option value="60 dias">60 dias</option>
+                    <option value="90 dias">90 dias</option>
+                    <option value="180 dias">180 dias</option>
+                    <option value="Outro">Outro...</option>
+                </select>
+                <input type="text" id="item_${i}_garantia_outro" class="form-input" style="display:none; margin-top:8px;" placeholder="Digite a garantia">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group" style="width:100%;">
+                <label class="title-label">Valor Discriminado</label>
+                <input type="text" id="item_${i}_valor" class="form-input" placeholder="Opcional">
+            </div>
+        </div>
     </div>`;
 }
 containerImoveis.innerHTML = htmlBlocos;
@@ -69,7 +108,6 @@ containerImoveis.innerHTML = htmlBlocos;
 // INICIALIZAÇÃO E EVENTOS AO ABRIR O SISTEMA
 // ==========================================
 document.addEventListener("DOMContentLoaded", function() {
-    // Escuta dos Rascunhos Automáticos
     const formImovel = document.getElementById('reciboForm');
     if (formImovel) {
         formImovel.addEventListener('input', salvarRascunhoAutomatico);
@@ -92,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // RASCUNHO AUTOMÁTICO (ANTI-PERDA DE DADOS)
 // ==========================================
 function salvarRascunhoAutomatico() {
-    if (idReciboEmEdicao) return; // Não salva no rascunho se estiver no modo de edição!
+    if (idReciboEmEdicao) return; 
     
     const abaAtiva = document.querySelector('.view-section.active').id;
     
@@ -159,7 +197,7 @@ function limparRascunho(abaId) {
 }
 
 // ==========================================
-// NAVEGAÇÃO E MODAL INICIAL
+// NAVEGAÇÃO E MODAIS
 // ==========================================
 function abrirModalEscolhaRecibo() { 
     document.getElementById("modalEscolhaRecibo").style.display = "flex"; 
@@ -172,7 +210,6 @@ function mudarAba(abaId) {
     document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
     document.getElementById('view-' + abaId).classList.add('active');
     
-    // Lógica inteligente: Se voltou para o Dashboard ou Histórico e NÃO estava no meio de uma edição, limpa a tela e destroi o rascunho
     if (abaId === 'dashboard' || abaId === 'historico') {
         if(!idReciboEmEdicao) { 
             limparRascunho('form');
@@ -187,10 +224,10 @@ function mudarAba(abaId) {
 function selecionarTipoFormulario(abaId) { 
     fecharModalEscolhaRecibo(); 
     mudarAba(abaId); 
-    recuperarRascunho(abaId); // Recupera automaticamente o rascunho se existir!
+    recuperarRascunho(abaId); 
 }
 
-function showLoader(txt = "A carregar dados...") { 
+function showLoader(txt = "Aguarde...") { 
     document.getElementById("loader-text").innerText = txt; 
     document.getElementById("loader").style.display = "flex"; 
 }
@@ -202,7 +239,7 @@ function hideLoader() {
 // LÓGICA DO DASHBOARD DINÂMICO
 // ==========================================
 function carregarDadosBackend() {
-    showLoader();
+    showLoader("A carregar dados...");
     fetch(URL_APPS_SCRIPT, { method: "POST", body: JSON.stringify({ acao: "dashboard" }), headers: { "Content-Type": "text/plain;charset=utf-8" } })
     .then(r => r.json()).then(d => {
         if(d.status === "sucesso") {
@@ -237,7 +274,7 @@ function alternarDashboard(tipo) {
 
 function renderizarTabelaComIcones(idTabela, arr) {
     const tbody = document.querySelector(`#${idTabela} tbody`); tbody.innerHTML = "";
-    if(arr.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Nenhum recibo encontrado.</td></tr>`; return; }
+    if(arr.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px; color:#6b7280;">Nenhum recibo encontrado.</td></tr>`; return; }
     
     arr.forEach(rec => {
         const tr = document.createElement("tr");
@@ -248,13 +285,13 @@ function renderizarTabelaComIcones(idTabela, arr) {
             <td><strong>${rec.cliente}</strong></td>
             <td>${rec.data_extenso}</td>
             <td>R$ ${rec.valor_numerico}</td>
-            <td style="text-align: center;"><small style="color:#6b7280">${rec.id_recibo}</small><br><strong>${rec.codigo_verificacao}</strong></td>
+            <td style="text-align: center; color:#1f2937;">${rec.id_recibo}</td>
             <td style="text-align: center;">
-                <div class="action-icons">
-                    <button type="button" class="icon-btn icon-pdf" onclick="window.open('${rec.url_pdf}', '_blank')" title="Ver PDF"><i class="fas fa-external-link-alt"></i></button>
-                    <button type="button" class="icon-btn icon-pdf" onclick="window.open('${l}', '_blank')" title="Baixar PDF"><i class="fas fa-download"></i></button>
-                    <button type="button" class="icon-btn icon-edit" onclick="iniciarEdicao('${obj64}')" title="Editar"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="icon-btn icon-del" onclick="excluirRecibo('${rec.id_recibo}')" title="Apagar"><i class="fas fa-trash-alt"></i></button>
+                <div class="actions">
+                    <button type="button" class="icon-btn icon-pdf" onclick="window.open('${rec.url_pdf}', '_blank')" title="Ver PDF"><span class="material-icons">visibility</span></button>
+                    <button type="button" class="icon-btn icon-share" onclick="window.open('${l}', '_blank')" title="Baixar PDF"><span class="material-icons">download</span></button>
+                    <button type="button" class="icon-btn icon-edit" onclick="iniciarEdicao('${obj64}')" title="Editar"><span class="material-icons">edit</span></button>
+                    <button type="button" class="icon-btn icon-del" onclick="excluirRecibo('${rec.id_recibo}')" title="Apagar"><span class="material-icons">delete</span></button>
                 </div>
             </td>`;
         tbody.appendChild(tr);
@@ -301,7 +338,8 @@ function iniciarEdicao(obj64) {
     if (rec.tipo_recibo === 'veiculo') {
         tipoReciboEdicao = 'veiculo'; resetarFormularioVeiculo();
         document.getElementById("spanIdEdicaoVeiculo").innerText = rec.id_recibo; document.getElementById("alertaEdicaoVeiculo").style.display = "flex";
-        document.getElementById("titulo-form-veiculo").innerHTML = "<i class='fas fa-edit'></i> Editar Recibo de Veículo"; document.getElementById("btnSubmitVeiculo").innerHTML = "<i class='fas fa-save'></i> Salvar Alterações do Veículo";
+        document.getElementById("titulo-form-veiculo").innerHTML = "Editando Recibo de Veículos"; 
+        document.getElementById("btnSubmitVeiculo").innerHTML = "Salvar Alterações";
         document.getElementById("cliente_v").value = rec.cliente; document.getElementById("valor_numerico_v").value = rec.valor_numerico; document.getElementById("valor_por_extenso_v").value = rec.valor_numerico ? numeroParaExtenso(rec.valor_numerico) : "";
         
         if(rec.cpf_cnpj_puro.length > 11) { document.querySelectorAll('input[name="tipo_pessoa_v"]')[1].checked = true; document.getElementById('docLabel_v').innerText = 'CNPJ'; } else { document.querySelectorAll('input[name="tipo_pessoa_v"]')[0].checked = true; document.getElementById('docLabel_v').innerText = 'CPF'; }
@@ -329,7 +367,8 @@ function iniciarEdicao(obj64) {
     else {
         tipoReciboEdicao = 'geral'; resetarFormularioBase();
         document.getElementById("spanIdEdicao").innerText = rec.id_recibo; document.getElementById("alertaEdicao").style.display = "flex";
-        document.getElementById("titulo-form").innerHTML = "<i class='fas fa-edit'></i> Editar Recibo de Imóveis"; document.getElementById("btnSubmit").innerHTML = "<i class='fas fa-save'></i> Salvar Alterações";
+        document.getElementById("titulo-form").innerHTML = "Editando Recibo de Imóveis"; 
+        document.getElementById("btnSubmit").innerHTML = "Salvar Alterações";
         document.getElementById("cliente").value = rec.cliente; document.getElementById("valor_numerico").value = rec.valor_numerico; document.getElementById("valor_por_extenso").value = rec.valor_numerico ? numeroParaExtenso(rec.valor_numerico) : "";
         
         if(rec.cpf_cnpj_puro.length > 11) { document.querySelectorAll('input[name="tipo_pessoa"]')[1].checked = true; document.getElementById('docLabel').innerText = 'CNPJ'; } else { document.querySelectorAll('input[name="tipo_pessoa"]')[0].checked = true; document.getElementById('docLabel').innerText = 'CPF'; }
@@ -361,14 +400,14 @@ function resetarFormularioBase() {
         if(i>1) document.getElementById("bloco_item_"+i).style.display="none"; 
         document.getElementById('item_'+i+'_servico_select').value=""; document.getElementById('item_'+i+'_servico_outro').value=""; document.getElementById('item_'+i+'_servico_outro').style.display="none"; document.getElementById('item_'+i+'_data').value=""; document.getElementById('item_'+i+'_local').value=""; document.getElementById('item_'+i+'_garantia_select').value=""; document.getElementById('item_'+i+'_garantia_outro').value=""; document.getElementById('item_'+i+'_garantia_outro').style.display="none"; document.getElementById('item_'+i+'_valor').value=""; 
     } 
-    idReciboEmEdicao = null; tipoReciboEdicao = null; document.getElementById("alertaEdicao").style.display = "none"; document.getElementById("titulo-form").innerHTML = "<i class='fas fa-home'></i> Novo Recibo de Imóveis"; document.getElementById("btnSubmit").innerHTML = "<i class='fas fa-check'></i> Salvar e Gerar Recibo"; document.getElementById('docLabel').innerText = 'CPF'; document.getElementById("data_recibo").value = new Date().toISOString().split("T")[0]; document.getElementById("btnAddItem").style.display = "block"; 
+    idReciboEmEdicao = null; tipoReciboEdicao = null; document.getElementById("alertaEdicao").style.display = "none"; document.getElementById("titulo-form").innerHTML = "Novo Recibo de Imóveis"; document.getElementById("btnSubmit").innerHTML = "Salvar e Gerar Recibo"; document.getElementById('docLabel').innerText = 'CPF'; document.getElementById("data_recibo").value = new Date().toISOString().split("T")[0]; document.getElementById("btnAddItem").style.display = "block"; 
     
     document.getElementById("incluir_dados_bancarios").checked = false;
 }
 
 function resetarFormularioVeiculo() { 
     document.getElementById("reciboVeiculoForm").reset(); 
-    idReciboEmEdicao = null; tipoReciboEdicao = null; document.getElementById("alertaEdicaoVeiculo").style.display = "none"; document.getElementById("titulo-form-veiculo").innerHTML = "<i class='fas fa-car'></i> Novo Recibo de Veículos"; document.getElementById("btnSubmitVeiculo").innerHTML = "<i class='fas fa-check'></i> Salvar Recibo de Veículo"; document.getElementById('docLabel_v').innerText = 'CPF'; document.getElementById("data_recibo_v").value = new Date().toISOString().split("T")[0]; document.getElementById("garantia_outro_v").style.display = "none"; 
+    idReciboEmEdicao = null; tipoReciboEdicao = null; document.getElementById("alertaEdicaoVeiculo").style.display = "none"; document.getElementById("titulo-form-veiculo").innerHTML = "Novo Recibo de Veículos"; document.getElementById("btnSubmitVeiculo").innerHTML = "Salvar Recibo de Veículo"; document.getElementById('docLabel_v').innerText = 'CPF'; document.getElementById("data_recibo_v").value = new Date().toISOString().split("T")[0]; document.getElementById("garantia_outro_v").style.display = "none"; 
     
     document.getElementById("incluir_dados_bancarios_v").checked = false;
 }
@@ -377,7 +416,7 @@ function resetarFormularioVeiculo() {
 // ENVIOS DOS FORMs PARA O BACKEND
 // ==========================================
 document.getElementById("reciboForm").addEventListener("submit", function(event) {
-    event.preventDefault(); const btn = this.querySelector("button[type=submit]"); btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> A processar..."; btn.disabled = true;
+    event.preventDefault(); const btn = this.querySelector("button[type=submit]"); btn.innerHTML = "A processar..."; btn.disabled = true;
     let doc = document.getElementById("cpf_cnpj").value.trim();
     let t = document.querySelector('input[name="tipo_pessoa"]:checked').value;
     let p = doc.replace(/\D/g, '');
@@ -401,11 +440,11 @@ document.getElementById("reciboForm").addEventListener("submit", function(event)
         item_05: montarTextoItem(5),
         incluir_dados_bancarios: document.getElementById("incluir_dados_bancarios").checked 
     };
-    enviarBackend(dados, btn, resetarFormularioBase, idReciboEmEdicao ? "<i class='fas fa-save'></i> Salvar Alterações" : "<i class='fas fa-check'></i> Salvar e Gerar Recibo");
+    enviarBackend(dados, btn, resetarFormularioBase, idReciboEmEdicao ? "Salvar Alterações" : "Salvar e Gerar Recibo");
 });
 
 document.getElementById("reciboVeiculoForm").addEventListener("submit", function(event) {
-    event.preventDefault(); const btn = this.querySelector("button[type=submit]"); btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> A processar..."; btn.disabled = true;
+    event.preventDefault(); const btn = this.querySelector("button[type=submit]"); btn.innerHTML = "A processar..."; btn.disabled = true;
     let doc = document.getElementById("cpf_cnpj_v").value.trim();
     let t = document.querySelector('input[name="tipo_pessoa_v"]:checked').value;
     let p = doc.replace(/\D/g, '');
@@ -428,7 +467,7 @@ document.getElementById("reciboVeiculoForm").addEventListener("submit", function
         garantia: document.getElementById("garantia_select_v").value === "Outro" ? document.getElementById("garantia_outro_v").value : document.getElementById("garantia_select_v").value,
         incluir_dados_bancarios: document.getElementById("incluir_dados_bancarios_v").checked 
     };
-    enviarBackend(dados, btn, resetarFormularioVeiculo, idReciboEmEdicao ? "<i class='fas fa-save'></i> Salvar Alterações do Veículo" : "<i class='fas fa-check'></i> Salvar Recibo de Veículo");
+    enviarBackend(dados, btn, resetarFormularioVeiculo, idReciboEmEdicao ? "Salvar Alterações" : "Salvar Recibo de Veículo");
 });
 
 function enviarBackend(dados, btn, fReset, txtBotaoBase) {
@@ -437,7 +476,7 @@ function enviarBackend(dados, btn, fReset, txtBotaoBase) {
     .then(r => r.json())
     .then(data => { 
         if(data.status === "sucesso") { 
-            limparRascunho(dados.tipo_recibo === 'veiculo' ? 'form-veiculo' : 'form'); // Apaga o rascunho com sucesso
+            limparRascunho(dados.tipo_recibo === 'veiculo' ? 'form-veiculo' : 'form'); 
             mostrarAlerta(`Sucesso! Recibo ${data.acao_realizada === 'editar'?'atualizado':'gerado'}:\n${data.id_recibo}`); 
             fReset(); 
             carregarDadosBackend(); 
@@ -477,16 +516,16 @@ function montarTextoItem(n) { const b = document.getElementById("bloco_item_" + 
 // ==========================================
 document.getElementById("btnAbrirImportacao").addEventListener("click", function() { 
     modalImportacaoContext = 'imovel'; document.getElementById("thServicoPlaca").innerText = "Serviço";
-    const btn = this; btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> A buscar..."; btn.disabled = true; 
+    const btn = this; btn.innerHTML = "A buscar..."; btn.disabled = true; 
     fetch(URL_APPS_SCRIPT, { method: "POST", body: JSON.stringify({ acao: "importar", tipo_recibo: "geral" }) })
-    .then(r=>r.json()).then(d=>{ if (d.status === "sucesso") { baseServicosGeral = d.dados; document.getElementById("modalImportacao").style.display = "flex"; document.getElementById("buscaModal").value = ""; renderizarTabelaModal(baseServicosGeral.slice(0, 10)); atualizarContadorModal(); } else mostrarAlerta("Erro: " + d.mensagem); }).finally(() => { btn.innerHTML = "<i class='fas fa-search'></i> Importar"; btn.disabled = false; }); 
+    .then(r=>r.json()).then(d=>{ if (d.status === "sucesso") { baseServicosGeral = d.dados; document.getElementById("modalImportacao").style.display = "flex"; document.getElementById("buscaModal").value = ""; renderizarTabelaModal(baseServicosGeral.slice(0, 10)); atualizarContadorModal(); } else mostrarAlerta("Erro: " + d.mensagem); }).finally(() => { btn.innerHTML = `<span class="material-icons" style="font-size:18px;">cloud_download</span> Importar`; btn.disabled = false; }); 
 });
 
 document.getElementById("btnAbrirImportacaoVeiculo").addEventListener("click", function() { 
     modalImportacaoContext = 'veiculo'; document.getElementById("thServicoPlaca").innerText = "Placa";
-    const btn = this; btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> A buscar..."; btn.disabled = true; 
+    const btn = this; btn.innerHTML = "A buscar..."; btn.disabled = true; 
     fetch(URL_APPS_SCRIPT, { method: "POST", body: JSON.stringify({ acao: "importar", tipo_recibo: "veiculo" }) })
-    .then(r=>r.json()).then(d=>{ if (d.status === "sucesso") { baseServicosGeral = d.dados; document.getElementById("modalImportacao").style.display = "flex"; document.getElementById("buscaModal").value = ""; renderizarTabelaModal(baseServicosGeral.slice(0, 10)); atualizarContadorModal(); } else mostrarAlerta("Erro: " + d.mensagem); }).finally(() => { btn.innerHTML = "<i class='fas fa-search'></i> Importar"; btn.disabled = false; }); 
+    .then(r=>r.json()).then(d=>{ if (d.status === "sucesso") { baseServicosGeral = d.dados; document.getElementById("modalImportacao").style.display = "flex"; document.getElementById("buscaModal").value = ""; renderizarTabelaModal(baseServicosGeral.slice(0, 10)); atualizarContadorModal(); } else mostrarAlerta("Erro: " + d.mensagem); }).finally(() => { btn.innerHTML = `<span class="material-icons" style="font-size:18px;">cloud_download</span> Importar`; btn.disabled = false; }); 
 });
 
 function fecharModalImportacao() { document.getElementById("modalImportacao").style.display = "none"; } 
@@ -501,11 +540,11 @@ document.getElementById("buscaModal").addEventListener("input", function(e) {
 
 function renderizarTabelaModal(lista) { 
     const tbody = document.querySelector("#tabelaServicos tbody"); tbody.innerHTML = ""; 
-    if (lista.length === 0) { tbody.innerHTML = `<tr><td colspan="4" align="center">Nenhum registo.</td></tr>`; return; } 
+    if (lista.length === 0) { tbody.innerHTML = `<tr><td colspan="4" align="center" style="padding:15px; color:#6b7280;">Nenhum registo encontrado.</td></tr>`; return; } 
     lista.forEach(srv => { 
         const tr = document.createElement("tr"); 
         let infoEspecífica = modalImportacaoContext === 'veiculo' ? srv.placa : srv.servico;
-        tr.innerHTML = `<td align="center"><input type="checkbox" class="chk-linha" value="${encodeURIComponent(JSON.stringify(srv))}" onchange="atualizarContadorModal()"></td><td><strong>${srv.cliente}</strong></td><td>${infoEspecífica}</td><td>${formatarDataPadrao(srv.data)}</td>`; 
+        tr.innerHTML = `<td align="center"><input type="checkbox" class="chk-linha" style="width:16px; height:16px; accent-color:#004481; cursor:pointer;" value="${encodeURIComponent(JSON.stringify(srv))}" onchange="atualizarContadorModal()"></td><td><strong>${srv.cliente}</strong></td><td>${infoEspecífica}</td><td>${formatarDataPadrao(srv.data)}</td>`; 
         tbody.appendChild(tr); 
     }); 
 }
@@ -515,7 +554,7 @@ function atualizarContadorModal() {
     const limite = modalImportacaoContext === 'veiculo' ? 1 : 5;
     const ctr = document.getElementById("contadorSelecao"); 
     ctr.innerText = `${q}/${limite} selecionados`; 
-    ctr.style.color = q > limite ? "red" : "#555"; 
+    ctr.style.color = q > limite ? "red" : "#6b7280"; 
 }
 
 document.getElementById("btnConfirmarModal").addEventListener("click", function() { 
