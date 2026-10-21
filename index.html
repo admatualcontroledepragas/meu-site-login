@@ -205,7 +205,6 @@
                 <div class="form-group">
                     <label>NOME</label>
                     <div class="form-group-input">
-                        <!-- Adicionado: autocomplete="username" -->
                         <input type="text" id="loginUser" class="input-login" placeholder="Nome" autocomplete="username" required>
                     </div>
                 </div>
@@ -213,9 +212,7 @@
                 <div class="form-group">
                     <label>SENHA</label>
                     <div class="form-group-input">
-                        <!-- Adicionado: autocomplete="current-password" -->
                         <input type="password" id="loginPass" class="input-login" placeholder="******" autocomplete="current-password" required>
-                        <!-- Botão Olhinho alinhado na vertical -->
                         <button type="button" class="btn-toggle-senha" onclick="toggleSenha()">
                             <span class="material-icons" id="icone-olho">visibility</span>
                         </button>
@@ -240,6 +237,12 @@
             <a href="relatorios/index.html" class="menu-card">
                 <div class="icon"><span class="material-icons">assignment_turned_in</span></div>
                 <div class="info"><h3>Relatórios e Certificados</h3><p>Gestão de Serviços e Garantias</p></div>
+            </a>
+
+            <!-- NOVO BOTÃO: RECIBOS -->
+            <a href="recibos/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">receipt_long</span></div>
+                <div class="info"><h3>Recibos</h3><p>Emissão e Gestão Financeira</p></div>
             </a>
             
             <div class="btn-sair" onclick="sair()">Sair do Portal</div>
