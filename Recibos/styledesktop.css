@@ -1,0 +1,104 @@
+/* =======================================================
+   ARQUIVO: styledesktop.css (RECIBOS)
+   (Melhorias e Layout Premium Exclusivo para Telas a partir de 1025px)
+   ======================================================= */
+
+/* 1. FUNDO ESCURO E AJUSTE DE MARGENS GLOBAIS */
+body {
+    padding: 0 !important; /* Remove o padding para colar a barra ao topo */
+    background-color: #323232; /* Fundo escuro igual aos Relatórios */
+}
+
+#app-container {
+    width: 100%;
+    max-width: 100% !important; /* Permite que a barra ocupe 100% do ecrã horizontalmente */
+    margin: 0;
+}
+
+/* 2. NAVBAR (CABEÇALHO COLADO DE PONTA A PONTA) */
+.top-header {
+    border-radius: 0 !important; 
+    margin-bottom: 0 !important; 
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+    background-color: white; /* No PC fica com fundo branco para contrastar com o cinza escuro */
+    justify-content: flex-start;
+    padding: 20px 30px;
+}
+
+/* Restringe a largura apenas do conteúdo abaixo da barra, mantendo o alinhamento central */
+.view-section {
+    max-width: 1200px !important;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* 3. DASHBOARD E MÉTRICAS (Quadro de Ponta a Ponta) */
+.total-card {
+    display: block; 
+    width: 100%;
+    margin-bottom: 35px;
+    padding: 30px;
+    transition: transform 0.2s, box-shadow 0.2s; 
+    box-sizing: border-box;
+}
+.total-card:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 4. BARRA DE AÇÕES DO DASHBOARD */
+.dash-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.btn-dash {
+    min-width: 180px; 
+}
+
+/* 5. FORMULÁRIOS E CARTÕES */
+.card-container, .table-card {
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* Reduz ligeiramente a largura dos formulários para não ficarem gigantescos num monitor largo */
+#view-form .card-container, 
+#view-form-veiculo .card-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 6. TABELAS E CENTRALIZAÇÃO DAS AÇÕES */
+.styled-table tbody tr {
+    transition: background-color 0.2s;
+}
+.styled-table tbody tr:hover {
+    background-color: #f8fafc; /* Realce azul claro ao passar o rato */
+}
+
+/* Centraliza a última célula (Ações) e resolve o problema da quebra de linha */
+.styled-table th:last-child, 
+.styled-table td:last-child {
+    text-align: center !important; 
+    vertical-align: middle !important; 
+    width: 190px !important; /* Espaço suficiente para os 4 botões (PDF, Baixar, Editar, Excluir) */
+    min-width: 170px !important;
+}
+
+/* Mantém os ícones alinhados entre si no centro perfeito e impede que caiam */
+.styled-table td:last-child .action-icons {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important; 
+    align-items: center !important;
+    flex-wrap: nowrap !important; /* MÁGICA: Proíbe estritamente a quebra de linha */
+    height: 100% !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
