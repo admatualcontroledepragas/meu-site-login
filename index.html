@@ -1,277 +1,345 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Empresarial | H D C ALVES</title>
-    
-    <!-- Fonte e Ícones Oficiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Atual Saúde Ambiental - Portal</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#14234c">
+
+    <!-- Ícones da Aplicação (Logo Local) -->
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --primary: #004481;
-            --primary-dark: #14234c;
-            --bg-color: #f4f7fb;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        /* Layout de Fundo Dividido */
+        body { 
+            background-color: #14234c; /* Azul exato da Logo */
+            color: #333; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+        /* LOGO NO TOPO */
+        .logo-container {
+            width: 100%;
+            height: 35vh; /* Ocupa 35% da tela */
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .logo-container img {
+            width: 140px; 
+            height: auto;
+        }
 
-        /* =========================================
-           TELA DE LOGIN
-           ========================================= */
-        #login-view {
+        /* CARTÃO BRANCO PRINCIPAL (Expande até ao fundo) */
+        .login-card {
+            background-color: white;
+            width: 100%;
+            flex-grow: 1; /* Preenche todo o resto da tela para não aparecer azul em baixo */
+            border-radius: 60px 0 0 0; /* Canto superior esquerdo arredondado */
+            padding: 40px 30px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* TELA DE LOGIN */
+        #tela-login { 
+            width: 100%; 
+            max-width: 320px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            flex-grow: 1; /* Força o rodapé a ir para o fundo */
+        }
+
+        /* TEXTOS DO TÍTULO */
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #14234c; font-size: 32px; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+        .header p { color: #888; font-size: 15px; font-weight: 500; }
+
+        /* FORMULÁRIO E CAMPOS */
+        form { width: 100%; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            color: #888;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            margin-left: 10px;
+        }
+
+        /* Contentor relativo para centralizar o olho na vertical */
+        .form-group-input {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Input Estilo Pílula */
+        .input-login { 
+            width: 100%; 
+            padding: 16px 45px 16px 20px; /* Padding direito maior para não escrever por cima do olho */
+            background-color: #e5e7eb; 
+            border: none; 
+            border-radius: 25px; 
+            font-size: 15px; 
+            color: #333;
+            outline: none; 
+            transition: 0.2s;
+        }
+        .input-login:focus { background-color: #d1d5db; }
+        .input-login::placeholder { color: #6b7280; }
+
+        /* Olhinho da Senha */
+        .btn-toggle-senha {
+            position: absolute;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex: 1;
-            padding: 20px;
-        }
-        .login-box {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        .login-box h1 { color: var(--primary-dark); font-size: 24px; margin-bottom: 5px; font-weight: 800; letter-spacing: 0.5px; }
-        .login-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
-        .form-input {
-            width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #e5e7eb;
-            border-radius: 8px; font-size: 15px; outline: none; transition: 0.2s;
-        }
-        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,68,129,0.1); }
-        .btn-login {
-            width: 100%; padding: 14px; background: var(--primary); color: white; border: none;
-            border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; transition: 0.2s;
-        }
-        .btn-login:hover { background: var(--primary-dark); transform: translateY(-2px); }
-        #login-error { color: #ef4444; font-size: 13px; font-weight: 600; margin-top: 15px; display: none; }
-
-        /* =========================================
-           PORTAL / DASHBOARD PRINCIPAL
-           ========================================= */
-        #portal-view { display: none; flex-direction: column; flex: 1; }
-        
-        .navbar {
-            background: white; padding: 20px 40px; display: flex; justify-content: space-between;
-            align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .navbar-brand { display: flex; align-items: center; gap: 10px; color: var(--primary-dark); font-weight: 800; font-size: 20px; }
-        .user-menu { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: 500; }
-        .btn-sair { color: #ef4444; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600; transition: 0.2s; }
-        .btn-sair:hover { color: #b91c1c; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; width: 100%; }
-        .welcome-text { margin-bottom: 30px; }
-        .welcome-text h2 { font-size: 28px; color: var(--primary-dark); margin-bottom: 5px; }
-        .welcome-text p { color: var(--text-muted); font-size: 16px; }
-
-        .modulos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            padding: 5px;
         }
 
-        .modulo-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 30px 25px;
-            text-decoration: none;
-            color: var(--text-main);
-            border: 1px solid #e5e7eb;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* BOTÃO ENTRAR */
+        .btn-login { 
+            background-color: #14234c; 
+            color: white; 
+            width: 100%; 
+            padding: 16px; 
+            border: none; 
+            border-radius: 25px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin-top: 10px;
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            position: relative;
-            overflow: hidden;
+            align-items: center;
+            justify-content: center;
         }
-        .modulo-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%;
-            background: var(--primary); transition: 0.3s;
-        }
-        .modulo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            border-color: #cbd5e1;
-        }
-        .modulo-card:hover::before { width: 100%; opacity: 0.05; }
-        
-        .modulo-icon {
-            background: #eff6ff; color: var(--primary); width: 60px; height: 60px;
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-        .modulo-icon .material-icons { font-size: 32px; }
-        
-        .modulo-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary-dark); }
-        .modulo-info p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .btn-login:disabled { background-color: #6b7280; cursor: not-allowed; }
 
-        @media (max-width: 768px) {
-            .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .user-menu { width: 100%; justify-content: space-between; }
-            .modulos-grid { grid-template-columns: 1fr; }
+        /* SPINNER DE CARREGAMENTO */
+        .spinner {
+            display: inline-block; width: 18px; height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff;
+            animation: spin 0.8s ease-in-out infinite; vertical-align: middle; margin-right: 8px;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* RODAPÉ SITE */
+        .footer-site {
+            margin-top: auto; 
+            color: #9ca3af;
+            font-size: 12px;
+            text-align: center;
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        /* ------------------------------------------- */
+        /* MENU DE SISTEMAS (MOSTRADO APÓS LOGIN)      */
+        /* ------------------------------------------- */
+        #menu-sistemas { 
+            display: none; 
+            width: 100%; 
+            max-width: 350px; 
+            flex-direction: column; 
+            align-items: center;
+            margin-top: 10px;
+        }
+        .bem-vindo { text-align: center; margin-bottom: 25px; font-weight: 700; color: #14234c; font-size: 20px; }
+
+        .menu-card {
+            background: white; border-radius: 16px; padding: 15px 20px; display: flex; align-items: center; gap: 15px;
+            text-decoration: none; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: transform 0.2s;
+            border: 1px solid #f3f4f6;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .menu-card:active { transform: scale(0.98); }
+        .menu-card .icon { background: #14234c; padding: 12px; border-radius: 12px; color: white; display: flex; }
+        .menu-card .info h3 { font-size: 15px; margin-bottom: 2px; color: #14234c; }
+        .menu-card .info p { font-size: 11px; color: #6b7280; }
+
+        .btn-sair { margin-top: 20px; text-align: center; color: #dc2626; font-weight: bold; cursor: pointer; padding: 10px; font-size: 15px; }
+
     </style>
 </head>
 <body>
 
-    <!-- =========================================
-         TELA DE LOGIN
-         ========================================= -->
-    <div id="login-view">
-        <div class="login-box">
-            <h1>H D C ALVES</h1>
-            <p>Acesso Restrito ao Sistema</p>
-            
-            <form id="loginForm">
-                <input type="text" id="usuario" class="form-input" placeholder="Usuário" required autocomplete="off">
-                <input type="password" id="senha" class="form-input" placeholder="Senha" required>
-                
-                <button type="submit" class="btn-login" id="btnSubmit">ENTRAR NO SISTEMA</button>
-                <div id="login-error">⚠️ Usuário ou senha incorretos.</div>
+    <!-- LOGO NO TOPO AZUL -->
+    <div class="logo-container" id="area-logo">
+        <img src="logo.png" alt="Logo Atual">
+    </div>
+
+    <!-- CARTÃO BRANCO (Fundo) -->
+    <div class="login-card">
+
+        <!-- ÁREA DE LOGIN -->
+        <div id="tela-login">
+            <div class="header">
+                <h1>ATUAL</h1>
+                <p>Saúde Ambiental</p>
+            </div>
+
+            <form onsubmit="fazerLogin(event)">
+                <div class="form-group">
+                    <label>NOME</label>
+                    <div class="form-group-input">
+                        <input type="text" id="loginUser" class="input-login" placeholder="Nome" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>SENHA</label>
+                    <div class="form-group-input">
+                        <input type="password" id="loginPass" class="input-login" placeholder="******" autocomplete="current-password" required>
+                        <button type="button" class="btn-toggle-senha" onclick="toggleSenha()">
+                            <span class="material-icons" id="icone-olho">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnLogin" class="btn-login">Entrar</button>
             </form>
+
+            <div class="footer-site">www.atualsaudeambiental.com.br</div>
+        </div>
+
+        <!-- ÁREA DOS SISTEMAS -->
+        <div id="menu-sistemas">
+            <div class="bem-vindo" id="msg-bemvindo"></div>
+
+            <a href="comunicados/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">campaign</span></div>
+                <div class="info"><h3>Comunicados</h3><p>Dedetização, Limpeza e Termo</p></div>
+            </a>
+
+            <a href="relatorios/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">analytics</span></div>
+                <div class="info"><h3>Relatórios e Certificados</h3><p>Gestão de Serviços e Garantias</p></div>
+            </a>
+
+            <a href="recibos/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">receipt_long</span></div>
+                <div class="info"><h3>Recibos</h3><p>Emissão e Gestão Financeira</p></div>
+            </a>
+
+            <a href="contratos/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">history_edu</span></div>
+                <div class="info"><h3>Contratos</h3><p>Emissão de Contratos de Serviço</p></div>
+            </a>
+
+            <a href="comprovantes/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">assignment_turned_in</span></div>
+                <div class="info"><h3>Comprovantes</h3><p>Registros da execução em campo</p></div>
+            </a>
+
+            <a href="cronogramas/index.html" class="menu-card">
+                <div class="icon"><span class="material-icons">calendar_month</span></div>
+                <div class="info"><h3>Cronogramas</h3><p>Planejamento anual de visitas</p></div>
+            </a>
+
+            <div class="btn-sair" onclick="sair()">Sair do Portal</div>
         </div>
     </div>
 
-    <!-- =========================================
-         PORTAL DE MÓDULOS
-         ========================================= -->
-    <div id="portal-view">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <span class="material-icons">business_center</span> PORTAL EMPRESARIAL
-            </div>
-            <div class="user-menu">
-                <span>Olá, <strong id="nomeUsuarioDisplay">Administrador</strong></span>
-                <span class="btn-sair" onclick="fazerLogout()"><span class="material-icons" style="font-size:18px;">logout</span> Sair</span>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="welcome-text">
-                <h2>Módulos do Sistema</h2>
-                <p>Selecione a ferramenta que deseja acessar abaixo.</p>
-            </div>
-
-            <div class="modulos-grid">
-                <!-- Recibos -->
-                <a href="recibos/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">receipt_long</span></div>
-                    <div class="modulo-info">
-                        <h3>Recibos</h3>
-                        <p>Emissão e gestão de recibos de pagamento para clientes, com geração de PDF automático.</p>
-                    </div>
-                </a>
-
-                <!-- Relatórios -->
-                <a href="relatorios/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">analytics</span></div>
-                    <div class="modulo-info">
-                        <h3>Relatórios Técnicos</h3>
-                        <p>Criação de relatórios técnicos de intervenção com anexação de registos fotográficos.</p>
-                    </div>
-                </a>
-
-                <!-- Comunicados -->
-                <a href="comunicados/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">campaign</span></div>
-                    <div class="modulo-info">
-                        <h3>Comunicados</h3>
-                        <p>Avisos prévios de execução de serviços e orientações de segurança para clientes.</p>
-                    </div>
-                </a>
-
-                <!-- Contratos -->
-                <a href="contratos/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">history_edu</span></div>
-                    <div class="modulo-info">
-                        <h3>Contratos</h3>
-                        <p>Gestão de contratos de prestação de serviços, cláusulas e condições financeiras.</p>
-                    </div>
-                </a>
-
-                <!-- Comprovantes -->
-                <a href="comprovantes/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">assignment_turned_in</span></div>
-                    <div class="modulo-info">
-                        <h3>Comprovantes de Execução</h3>
-                        <p>Registos de serviços realizados, horários, pragas alvo e assinaturas de responsáveis.</p>
-                    </div>
-                </a>
-
-                <!-- Cronogramas -->
-                <a href="cronogramas/index.html" class="modulo-card">
-                    <div class="modulo-icon"><span class="material-icons">calendar_month</span></div>
-                    <div class="modulo-info">
-                        <h3>Cronogramas</h3>
-                        <p>Planeamento anual de visitas técnicas e marcações no calendário por tipo de serviço.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- =========================================
-         LÓGICA DE ACESSO
-         ========================================= -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            verificarSessao();
-        });
-
-        function verificarSessao() {
-            if (sessionStorage.getItem("sessaoAtiva") === "true") {
-                document.getElementById("login-view").style.display = "none";
-                document.getElementById("portal-view").style.display = "flex";
-                document.getElementById("nomeUsuarioDisplay").innerText = sessionStorage.getItem("nomeUsuario") || "Administrador";
+        // FUNÇÃO DO OLHINHO DA SENHA
+        function toggleSenha() {
+            const inputSenha = document.getElementById('loginPass');
+            const iconeOlho = document.getElementById('icone-olho');
+            
+            if (inputSenha.type === 'password') {
+                inputSenha.type = 'text';
+                iconeOlho.innerText = 'visibility_off'; 
             } else {
-                document.getElementById("login-view").style.display = "flex";
-                document.getElementById("portal-view").style.display = "none";
+                inputSenha.type = 'password';
+                iconeOlho.innerText = 'visibility'; 
             }
         }
 
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // COLOQUE AQUI A URL DO NOVO SCRIPT (O COFRE CENTRAL)
+        const URL_API_LOGIN = "https://script.google.com/macros/s/AKfycbwxCNM7-XWJm2btht000tgZ343KsmCfwFG4gXmCCp8e-48nPDdS3Qw9gfvkJGWGu6ym/exec";
+        
+        // Verifica ao abrir se já está logado
+        window.onload = function() {
+            if (sessionStorage.getItem("sessaoAtiva") === "true") {
+                liberarPortal(sessionStorage.getItem("nomeUsuario"));
+            }
+        };
+
+        async function fazerLogin(e) {
             e.preventDefault();
-            const usr = document.getElementById('usuario').value.trim().toLowerCase();
-            const pwd = document.getElementById('senha').value.trim();
-            const btn = document.getElementById('btnSubmit');
-            const err = document.getElementById('login-error');
-
-            // === DEFINA AQUI O SEU USUÁRIO E SENHA MESTRE ===
-            const USUARIO_CORRETO = "admin";
-            const SENHA_CORRETA = "123456";
-
-            btn.innerText = "A VERIFICAR...";
+            const btn = document.getElementById('btnLogin');
+            
+            // Adiciona o SPINNER de carregamento
+            btn.innerHTML = '<div class="spinner"></div> Verificando...'; 
             btn.disabled = true;
-            err.style.display = "none";
 
-            setTimeout(() => {
-                if (usr === USUARIO_CORRETO && pwd === SENHA_CORRETA) {
+            const payload = {
+                acao: "login",
+                usuario: document.getElementById('loginUser').value,
+                senha: document.getElementById('loginPass').value
+            };
+
+            try {
+                const req = await fetch(URL_API_LOGIN, { method: 'POST', body: JSON.stringify(payload) });
+                const res = await req.json();
+
+                if (res.sucesso) {
                     sessionStorage.setItem("sessaoAtiva", "true");
-                    sessionStorage.setItem("nomeUsuario", "Caio Matheus"); // Ou outro nome que preferir
-                    verificarSessao();
+                    sessionStorage.setItem("nomeUsuario", res.nome);
+                    liberarPortal(res.nome);
                 } else {
-                    err.style.display = "block";
+                    alert(res.mensagem);
                 }
-                btn.innerText = "ENTRAR NO SISTEMA";
-                btn.disabled = false;
-            }, 800); // Pequeno delay para simular processamento
-        });
+            } catch (erro) {
+                alert("Erro de conexão com o servidor de acessos.");
+            }
+            
+            // Restaura o botão original após carregar
+            btn.innerHTML = "Entrar"; 
+            btn.disabled = false;
+        }
 
-        function fazerLogout() {
+        function liberarPortal(nome) {
+            document.getElementById('tela-login').style.display = 'none';
+            document.getElementById('menu-sistemas').style.display = 'flex';
+            document.getElementById('msg-bemvindo').innerText = "Olá, " + nome;
+        }
+
+        function sair() {
             sessionStorage.clear();
-            verificarSessao();
-            document.getElementById('usuario').value = "";
-            document.getElementById('senha').value = "";
+            document.getElementById('menu-sistemas').style.display = 'none';
+            
+            document.getElementById('area-logo').style.display = 'flex';
+            document.getElementById('tela-login').style.display = 'flex';
+            document.getElementById('loginPass').value = "";
+        }
+
+        // Registro do PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
         }
     </script>
 </body>
