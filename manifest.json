@@ -4,8 +4,8 @@
   "description": "Portal Operacional - Atual Saúde Ambiental",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f0f4f8",
-  "theme_color": "#021f59",
+  "background_color": "#14234c",
+  "theme_color": "#14234c",
   "icons": [
     {
       "src": "logo.png",
