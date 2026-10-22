@@ -1,19 +1,53 @@
-const CACHE_NAME = 'portal-atual-v38'; // Versão atualizada com os ficheiros separados
+const CACHE_NAME = 'portal-atual-v40'; // Versão atualizada com a integração total
 
 const urlsToCache = [
+  // Ficheiros da Raiz (Portal)
   './',
   './index.html',
   './manifest.json',
+  './logo.png',
   
-  // Sistema de Comunicados
-  './comunicados/index.html',
-  './comunicados/style.css',
-  './comunicados/script.js',
-  
-  // Sistema de Relatórios e Certificados
+  // Módulo: Recibos
+  './recibos/index.html',
+  './recibos/stylebase.css',
+  './recibos/stylemobile.css',
+  './recibos/styledesktop.css',
+  './recibos/script.js',
+
+  // Módulo: Relatórios e Certificados
   './relatorios/index.html',
-  './relatorios/style.css',
-  './relatorios/script.js'
+  './relatorios/stylebase.css',
+  './relatorios/stylemobile.css',
+  './relatorios/styledesktop.css',
+  './relatorios/script.js',
+
+  // Módulo: Comunicados
+  './comunicados/index.html',
+  './comunicados/stylebase.css',
+  './comunicados/stylemobile.css',
+  './comunicados/styledesktop.css',
+  './comunicados/script.js',
+
+  // Módulo: Contratos
+  './contratos/index.html',
+  './contratos/stylebase.css',
+  './contratos/stylemobile.css',
+  './contratos/styledesktop.css',
+  './contratos/script.js',
+
+  // Módulo: Comprovantes de Execução
+  './comprovantes/index.html',
+  './comprovantes/stylebase.css',
+  './comprovantes/stylemobile.css',
+  './comprovantes/styledesktop.css',
+  './comprovantes/script.js',
+
+  // Módulo: Cronogramas
+  './cronogramas/index.html',
+  './cronogramas/stylebase.css',
+  './cronogramas/stylemobile.css',
+  './cronogramas/styledesktop.css',
+  './cronogramas/script.js'
 ];
 
 // Instalação do Service Worker e ativação imediata
@@ -22,6 +56,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
+        console.log('A guardar ficheiros no cache...');
         return cache.addAll(urlsToCache);
       })
   );
@@ -34,6 +69,7 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
+            console.log('A limpar cache antigo:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -42,7 +78,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Interceptação de rede priorizando sempre os ficheiros mais recentes
+// Interceptação de rede (Estratégia: Network First, Fallback to Cache)
 self.addEventListener('fetch', event => {
   event.respondWith(
     fetch(event.request).catch(() => {
