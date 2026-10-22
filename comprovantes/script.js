@@ -6,7 +6,7 @@
 // ==========================================
 // COLE A URL DO SEU WEB APP ABAIXO
 // ==========================================
-const scriptURL = 'COLE_A_SUA_URL_DO_WEB_APP_AQUI'; // <<<<<<<< COLOQUE SUA URL AQUI
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxL5OneACefDAaNhu7iSF6dT14Erqgjkx8Pma8MZMCL7ZNztG6pYRv9gk8e2kbGHEB-/exec'; // <<<<<<<< COLOQUE SUA URL AQUI
 
 let todosOsRegistros = [];
 let registrosFiltrados = [];
