@@ -3,7 +3,7 @@
    Totalmente Padronizado (Material Icons e UI Unificada)
    ======================================================= */
 
-const WEB_APP_URL = "COLE_A_SUA_URL_DO_WEB_APP_AQUI"; // <<<<<<<< COLOQUE SUA URL AQUI
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxCKrxzasV4C98BEdwJH4-YIfvsUSLdCiQQvkStfuB4VPH8riPE5iT0otTcbv9iNGkQ/exec"; // <<<<<<<< COLOQUE SUA URL AQUI
 
 let todosContratos = [];
 let contratosFiltrados = [];
