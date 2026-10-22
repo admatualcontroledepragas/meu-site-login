@@ -6,7 +6,7 @@
 // ==========================================
 // COLE A URL DO SEU WEB APP ABAIXO
 // ==========================================
-const WEB_APP_URL = "COLE_A_SUA_URL_DO_WEB_APP_AQUI"; // <<<<<<<< COLOQUE SUA URL AQUI
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwBVvkfChPlsbVuHTFus47F4z-0dQCRZ4GSKWMirkiF4Ds4fM1oowZuhbVNavo3WlwBVQ/exec"; // <<<<<<<< COLOQUE SUA URL AQUI
 
 let modoEdicaoFormulario = false;
 let linhaEdicaoAtual = null;
