@@ -149,7 +149,9 @@ function abrirModulo(urlDestino, titulo, elementoClicado) {
         viewIframe.style.display = 'block';
         setTimeout(() => viewIframe.classList.add('active'), 10);
         
-        document.getElementById('frame-sistema').src = urlDestino;
+        // CORREÇÃO: Garante que o GitHub Pages resolve o caminho corretamente
+        const baseUrl = window.location.href.split('index.html')[0];
+        document.getElementById('frame-sistema').src = baseUrl + urlDestino;
     }
 }
 
