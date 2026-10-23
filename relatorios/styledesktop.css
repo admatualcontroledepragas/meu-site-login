@@ -1,34 +1,38 @@
 /* =======================================================
-   ARQUIVO: styledesktop.css
+   ARQUIVO: styledesktop.css (MÓDULO IFRAME)
    (Melhorias e Layout Premium Exclusivo para Telas a partir de 1025px)
    ======================================================= */
 
-/* 1. FUNDO ESCURO E AJUSTE DE MARGENS GLOBAIS */
+/* 1. INTEGRAÇÃO COM O IFRAME (Fundo Transparente e Sem Scroll) */
 body {
-    padding: 0 !important; /* Remove o padding para colar a barra ao topo */
-    background-color: #323232; /* Novo fundo escuro solicitado */
+    padding: 0 !important; 
+    background-color: transparent !important; /* Herda a cor escolhida no Portal (Azul, Branco, etc) */
+    overflow-y: hidden !important; /* Remove o duplo scroll. A rolagem é feita pelo portal */
+}
+
+/* Oculta a barra de rolagem (Scrollbar) para que o Iframe pareça nativo */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 #app-container {
     width: 100%;
-    max-width: 100% !important; /* Permite que a barra ocupe 100% do ecrã horizontalmente */
+    max-width: 100% !important; 
     margin: 0;
+    padding-bottom: 50px; /* Espaço extra no fundo */
 }
 
-/* 2. NAVBAR (CABEÇALHO COLADO DE PONTA A PONTA) */
+/* 2. NAVBAR (Ocultada no Desktop pois o Portal já tem a sua) */
 .navbar {
-    border-radius: 0 !important; /* Remove os cantos arredondados */
-    margin-bottom: 0 !important; /* O espaço será dado pelo conteúdo */
-    width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+    display: none !important;
 }
 
 /* Restringe a largura apenas do conteúdo abaixo da barra, mantendo o alinhamento central */
 .content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px; /* Padding reduzido, o portal já dá margem */
 }
 
 /* 3. DASHBOARD E MÉTRICAS (Quadro de Ponta a Ponta) */
@@ -143,7 +147,7 @@ th:last-child,
 td:last-child {
     text-align: center !important; 
     vertical-align: middle !important; 
-    width: 140px !important; /* Aumentado para dar espaço suficiente aos dois ícones */
+    width: 140px !important; 
     min-width: 120px !important;
 }
 
@@ -153,7 +157,7 @@ td:last-child .actions {
     flex-direction: row !important;
     justify-content: center !important; 
     align-items: center !important;
-    flex-wrap: nowrap !important; /* MÁGICA: Proíbe estritamente a quebra de linha */
+    flex-wrap: nowrap !important;
     height: 100% !important;
     gap: 12px !important;
     margin: 0 !important;
