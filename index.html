@@ -8,27 +8,63 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#172c4c">
 
-    <!-- Ícones da Aplicação (Logo Local) -->
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="icon" type="image/png" href="logo.png">
 
-    <!-- Fonte Inter (Modernização tipográfica) e Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <!-- Chamada dos ficheiros CSS -->
-    <link rel="stylesheet" href="stylebase.css">
+    <!-- CSS BASE EMBUTIDO (Garante que o Login nunca desconfigura) -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
+        
+        body { background-color: #14234c; color: #333; min-height: 100vh; overflow-x: hidden; }
+
+        /* =========================================
+           TELA DE LOGIN (Desktop e Mobile)
+           ========================================= */
+        #login-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; }
+        
+        .logo-container { width: 100%; height: 35vh; min-height: 200px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+        .logo-container img { width: 140px; height: auto; }
+        
+        .login-card { background-color: white; width: 100%; flex-grow: 1; border-radius: 60px 0 0 0; padding: 40px 30px 20px 30px; display: flex; flex-direction: column; align-items: center; }
+        
+        #tela-login { width: 100%; max-width: 320px; display: flex; flex-direction: column; align-items: center; flex-grow: 1; }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #14234c; font-size: 32px; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+        .header p { color: #888; font-size: 15px; font-weight: 500; }
+        
+        form { width: 100%; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #888; font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; margin-left: 10px; }
+        
+        .form-group-input { position: relative; display: flex; align-items: center; }
+        .input-login { width: 100%; padding: 16px 45px 16px 20px; background-color: #e5e7eb; border: none; border-radius: 25px; font-size: 15px; color: #333; outline: none; transition: 0.2s; }
+        .input-login:focus { background-color: #d1d5db; }
+        .input-login::placeholder { color: #6b7280; }
+        
+        .btn-toggle-senha { position: absolute; right: 15px; background: transparent; border: none; color: #6b7280; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; }
+        
+        .btn-login { background-color: #14234c; color: white; width: 100%; padding: 16px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; display: flex; justify-content: center; align-items: center; }
+        .btn-login:disabled { background-color: #6b7280; cursor: not-allowed; }
+        
+        #login-error { color: #dc2626; font-size: 13px; font-weight: 600; text-align: center; margin-top: 15px; display: none; }
+        
+        .footer-site { margin-top: auto; color: #9ca3af; font-size: 12px; text-align: center; padding-bottom: 10px; width: 100%; }
+    </style>
+
+    <!-- Chamada dos estilos apenas para o interior do portal -->
     <link rel="stylesheet" media="screen and (min-width: 1025px)" href="styledesktop.css">
     <link rel="stylesheet" media="screen and (max-width: 1024px)" href="stylemobile.css">
 </head>
 <body data-tema="azul">
 
-    <!-- =========================================
-         ÁREA 1: TELA DE LOGIN (Igual ao Mobile)
-         ========================================= -->
+    <!-- ÁREA 1: TELA DE LOGIN -->
     <div id="login-wrapper">
         <div class="logo-container" id="area-logo">
-            <img src="logo.png" alt="Logo Atual" onerror="this.src='https://placehold.co/140x80/14234c/FFFFFF?text=LOGO'">
+            <img src="logo.png" alt="Logo Atual">
         </div>
 
         <div class="login-card">
@@ -67,12 +103,9 @@
         </div>
     </div>
 
-    <!-- =========================================
-         ÁREA 2: PORTAL DESKTOP PRINCIPAL
-         ========================================= -->
+    <!-- ÁREA 2: PORTAL DESKTOP PRINCIPAL -->
     <div id="portal-wrapper" style="display: none;">
         
-        <!-- SIDEBAR (Barra Lateral) -->
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-header">
                 <img src="logo.png" alt="Logo Atual" class="sidebar-logo">
@@ -115,15 +148,12 @@
             </ul>
         </nav>
 
-        <!-- ÁREA DE CONTEÚDO À DIREITA -->
         <main id="main-content">
             
-            <!-- TOPBAR (Menu do Topo) -->
             <header id="topbar">
                 <h2 id="topbar-title">Dashboard</h2>
                 <div class="topbar-right">
                     <span id="nomeUsuarioDisplay" class="user-name">Caio Matheus</span>
-                    <!-- O ícone de 3 traços agora funciona APENAS para Sair -->
                     <button class="btn-menu" onclick="sair()" title="Sair do Sistema">
                         <span class="material-icons">menu</span>
                     </button>
@@ -132,16 +162,13 @@
 
             <div class="content-wrapper">
                 
-                <!-- VIEW 1: DASHBOARD EM DESENVOLVIMENTO -->
                 <div id="view-dashboard" class="view-section active">
-                    
                     <div class="development-notice">
                         <span class="material-icons">construction</span>
                         <h3>Dashboard em desenvolvimento</h3>
                         <p>A área de indicadores gráficos e resumos operacionais será disponibilizada numa futura atualização.</p>
                     </div>
 
-                    <!-- Esqueleto Visual (Placeholder) -->
                     <div class="dashboard-skeleton">
                         <div class="skeleton-col">
                             <div class="skeleton-card card-tall"></div>
@@ -159,32 +186,24 @@
                     </div>
                 </div>
 
-                <!-- VIEW 2: CONFIGURAÇÕES -->
                 <div id="view-configuracoes" class="view-section" style="display: none;">
                     <div class="config-card">
                         <h3>Personalização do Sistema</h3>
                         <p>Escolha a cor de fundo (tema) que prefere usar na área principal do portal.</p>
                         
                         <div class="tema-opcoes">
-                            <!-- Azul Atual -->
                             <div class="tema-box" onclick="alterarTema('azul')">
                                 <div class="tema-cor" style="background-color: #172c4c; border: 2px solid #ffffff33;"></div>
                                 <span>Azul Original</span>
                             </div>
-                            
-                            <!-- Cinza Escuro -->
                             <div class="tema-box" onclick="alterarTema('escuro')">
                                 <div class="tema-cor" style="background-color: #1f2937; border: 2px solid #ffffff33;"></div>
                                 <span>Cinza Escuro</span>
                             </div>
-                            
-                            <!-- Cinza Claro -->
                             <div class="tema-box" onclick="alterarTema('claro')">
                                 <div class="tema-cor" style="background-color: #f3f4f6; border: 2px solid #d1d5db;"></div>
                                 <span style="color: #374151;">Cinza Claro</span>
                             </div>
-
-                            <!-- Branco -->
                             <div class="tema-box" onclick="alterarTema('branco')">
                                 <div class="tema-cor" style="background-color: #ffffff; border: 2px solid #e5e7eb;"></div>
                                 <span style="color: #374151;">Branco Puro</span>
@@ -197,7 +216,6 @@
         </main>
     </div>
 
-    <!-- Chamada do ficheiro JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
