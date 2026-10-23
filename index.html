@@ -20,16 +20,12 @@
         
         body { background-color: #14234c; color: #333; min-height: 100vh; overflow-x: hidden; }
 
-        /* =========================================
-           TELA DE LOGIN (Desktop e Mobile)
-           ========================================= */
+        /* TELA DE LOGIN */
         #login-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; }
-        
         .logo-container { width: 100%; height: 35vh; min-height: 200px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
         .logo-container img { width: 140px; height: auto; }
         
         .login-card { background-color: white; width: 100%; flex-grow: 1; border-radius: 60px 0 0 0; padding: 40px 30px 20px 30px; display: flex; flex-direction: column; align-items: center; }
-        
         #tela-login { width: 100%; max-width: 320px; display: flex; flex-direction: column; align-items: center; flex-grow: 1; }
         
         .header { text-align: center; margin-bottom: 30px; }
@@ -117,27 +113,28 @@
                     <span class="material-icons">home</span>
                     <span class="menu-text">Home</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='relatorios/index.html'">
+                <!-- Note a mudança para abrirModulo() -->
+                <li class="menu-item" onclick="abrirModulo('relatorios/index.html', 'Relatórios', this)">
                     <span class="material-icons">description</span>
                     <span class="menu-text">Relatórios</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='comunicados/index.html'">
+                <li class="menu-item" onclick="abrirModulo('comunicados/index.html', 'Comunicados', this)">
                     <span class="material-icons">campaign</span>
                     <span class="menu-text">Comunicados</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='recibos/index.html'">
+                <li class="menu-item" onclick="abrirModulo('recibos/index.html', 'Recibos', this)">
                     <span class="material-icons">request_quote</span>
                     <span class="menu-text">Recibos</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='contratos/index.html'">
+                <li class="menu-item" onclick="abrirModulo('contratos/index.html', 'Contratos', this)">
                     <span class="material-icons">history_edu</span>
                     <span class="menu-text">Contratos</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='cronogramas/index.html'">
+                <li class="menu-item" onclick="abrirModulo('cronogramas/index.html', 'Cronogramas', this)">
                     <span class="material-icons">calendar_month</span>
                     <span class="menu-text">Cronogramas</span>
                 </li>
-                <li class="menu-item" onclick="window.location.href='comprovantes/index.html'">
+                <li class="menu-item" onclick="abrirModulo('comprovantes/index.html', 'Comprovantes OP', this)">
                     <span class="material-icons">assignment_turned_in</span>
                     <span class="menu-text">Comprovantes OP</span>
                 </li>
@@ -162,6 +159,7 @@
 
             <div class="content-wrapper">
                 
+                <!-- VIEW 1: DASHBOARD EM DESENVOLVIMENTO -->
                 <div id="view-dashboard" class="view-section active">
                     <div class="development-notice">
                         <span class="material-icons">construction</span>
@@ -186,6 +184,12 @@
                     </div>
                 </div>
 
+                <!-- VIEW 2: JANELA DOS MÓDULOS (IFRAME) -->
+                <div id="view-iframe" class="view-section" style="display: none; height: 100%; width: 100%;">
+                    <iframe id="frame-sistema" src="" frameborder="0" style="width: 100%; height: 100%; border-radius: 12px; background: transparent;"></iframe>
+                </div>
+
+                <!-- VIEW 3: CONFIGURAÇÕES -->
                 <div id="view-configuracoes" class="view-section" style="display: none;">
                     <div class="config-card">
                         <h3>Personalização do Sistema</h3>
