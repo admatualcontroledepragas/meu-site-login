@@ -1,6 +1,6 @@
 /* =======================================================
    ARQUIVO: script.js (Portal Principal)
-   (Lógica de Login, Abas e Tema Personalizado)
+   (Lógica de Login, Abas, Tema Personalizado e Iframe)
    ======================================================= */
 
 // A SUA URL DA API DE LOGIN
@@ -10,7 +10,7 @@ const URL_API_LOGIN = "https://script.google.com/macros/s/AKfycbwxCNM7-XWJm2btht
 // INICIALIZAÇÃO
 // ==========================================
 window.onload = function() {
-    carregarTema(); // Verifica logo se há uma cor de fundo favorita guardada
+    carregarTema(); 
     
     if (sessionStorage.getItem("sessaoAtiva") === "true") {
         liberarPortal(sessionStorage.getItem("nomeUsuario"));
@@ -74,39 +74,37 @@ function liberarPortal(nome) {
     document.getElementById('portal-wrapper').style.display = 'flex';
     document.getElementById('nomeUsuarioDisplay').innerText = nome;
     
-    // Força a aba inicial a ser o Dashboard
     mudarAba('dashboard');
 }
 
-// O gatilho de saída agora está ligado ao ícone de três traços no topo direito
 function sair() {
     sessionStorage.clear();
     
     document.getElementById('portal-wrapper').style.display = 'none';
     document.getElementById('login-wrapper').style.display = 'flex';
     
-    // Limpa os campos
     document.getElementById('loginPass').value = "";
     document.getElementById('loginPass').type = "password";
     document.getElementById('icone-olho').innerText = 'visibility';
 }
 
 // ==========================================
-// LÓGICA DE NAVEGAÇÃO DE ABAS
+// LÓGICA DE NAVEGAÇÃO DE ABAS E IFRAME
 // ==========================================
-function mudarAba(abaId) {
-    // 1. Esconde todas as vistas
+
+function limparAtivos() {
     document.querySelectorAll('.view-section').forEach(el => {
         el.classList.remove('active');
         el.style.display = 'none';
     });
-    
-    // 2. Remove o estado ativo de todos os botões do menu lateral
     document.querySelectorAll('.menu-item').forEach(el => {
         el.classList.remove('active');
     });
+}
 
-    // 3. Mostra a aba correta e atualiza o título no topo
+function mudarAba(abaId) {
+    limparAtivos();
+
     if (abaId === 'dashboard') {
         const view = document.getElementById('view-dashboard');
         view.style.display = 'block';
@@ -115,6 +113,9 @@ function mudarAba(abaId) {
         document.getElementById('topbar-title').innerText = "Dashboard";
         document.querySelector('.menu-item:nth-child(1)').classList.add('active');
         
+        // Limpa o Iframe caso volte para a Home
+        document.getElementById('frame-sistema').src = "";
+        
     } else if (abaId === 'configuracoes') {
         const view = document.getElementById('view-configuracoes');
         view.style.display = 'block';
@@ -122,6 +123,33 @@ function mudarAba(abaId) {
         
         document.getElementById('topbar-title').innerText = "Configurações";
         document.querySelector('.menu-item:last-child').classList.add('active');
+        
+        document.getElementById('frame-sistema').src = "";
+    }
+}
+
+// NOVO: Função Inteligente de Roteamento (Desktop vs Mobile)
+function abrirModulo(urlDestino, titulo, elementoClicado) {
+    // Verifica a largura da tela (Se é telemóvel ou Desktop)
+    const ehMobile = window.innerWidth <= 1024;
+
+    if (ehMobile) {
+        // MOBILE: Comportamento Clássico (Recarrega a página toda)
+        window.location.href = urlDestino;
+    } else {
+        // DESKTOP: Usa o Iframe e mantém a barra lateral
+        limparAtivos();
+        
+        // Ativa o botão clicado
+        elementoClicado.classList.add('active');
+        document.getElementById('topbar-title').innerText = titulo;
+        
+        // Mostra o Iframe e carrega a URL
+        const viewIframe = document.getElementById('view-iframe');
+        viewIframe.style.display = 'block';
+        setTimeout(() => viewIframe.classList.add('active'), 10);
+        
+        document.getElementById('frame-sistema').src = urlDestino;
     }
 }
 
@@ -129,10 +157,7 @@ function mudarAba(abaId) {
 // SISTEMA DE TEMAS E PERSONALIZAÇÃO
 // ==========================================
 function alterarTema(tema) {
-    // Aplica a cor no HTML (O CSS styledesktop.css faz o resto dinamicamente)
     document.body.setAttribute('data-tema', tema);
-    
-    // Guarda a escolha para a próxima vez
     localStorage.setItem('temaPortalAtual', tema);
 }
 
@@ -141,12 +166,12 @@ function carregarTema() {
     if (temaSalvo) {
         document.body.setAttribute('data-tema', temaSalvo);
     } else {
-        document.body.setAttribute('data-tema', 'azul'); // Cor padrão original
+        document.body.setAttribute('data-tema', 'azul');
     }
 }
 
 // ==========================================
-// SERVICE WORKER (Mantido para PWA)
+// SERVICE WORKER
 // ==========================================
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
