@@ -13,7 +13,11 @@
     <script>
         if (sessionStorage.getItem("sessaoAtiva") !== "true") { window.location.href = "../index.html"; }
     </script>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- NOVAS FOLHAS DE ESTILO (Substitui o antigo style.css) -->
+    <link rel="stylesheet" href="stylebase.css">
+    <link rel="stylesheet" media="screen and (min-width: 1025px)" href="styledesktop.css">
+    <link rel="stylesheet" media="screen and (max-width: 1024px)" href="stylemobile.css">
 </head>
 <body>
 
@@ -97,7 +101,6 @@
                     <button class="tab-btn" onclick="setFiltroHistorico('Termo', this)">Fumacê</button>
                 </div>
 
-                <!-- NOVO PAINEL DE FILTROS -->
                 <div class="filtros-card">
                     <div class="form-grid">
                         <div class="form-group">
