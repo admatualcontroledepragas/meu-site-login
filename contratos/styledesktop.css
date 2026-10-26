@@ -3,26 +3,45 @@
    (Layout Premium Exclusivo para Ecrãs a partir de 1025px)
    ======================================================= */
 
-/* 1. FUNDO CLARO E AJUSTE DE MARGENS GLOBAIS */
+/* 1. INTEGRAÇÃO COM O IFRAME (Fundo Transparente e Sem Barra Visível) */
 body {
     padding: 0 !important; 
-    background-color: var(--bg-body); 
+    background-color: transparent !important; /* Herda a cor do Portal */
+    overflow-y: auto !important; /* Permite rolar a página com o rato */
+    overflow-x: hidden !important;
+    
+    /* Oculta a barra no Firefox e Edge antigo */
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
+}
+
+/* Oculta a barra no Chrome, Safari e novo Edge */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    background: transparent !important;
 }
 
 #app-container {
     width: 100%;
     max-width: 100% !important; 
     margin: 0;
+    padding-bottom: 50px; /* Espaço extra no fundo */
 }
 
-/* 2. REGRAS DE LARGURA DO CONTEÚDO */
+/* 2. NAVBAR (Ocultada no Desktop pois o Portal já tem a sua) */
+.navbar {
+    display: none !important;
+}
+
+/* 3. REGRAS DE LARGURA DO CONTEÚDO */
 .content {
     max-width: 1200px !important;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
-/* 3. DASHBOARD E MÉTRICAS (Alinhamento em Linha) */
+/* 4. DASHBOARD E MÉTRICAS */
 .metrics-container {
     display: flex; 
     width: 100%;
@@ -43,21 +62,21 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* 4. BARRA DE AÇÕES DO DASHBOARD */
+/* 5. BARRA DE AÇÕES */
 .action-bar {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
 }
 
-/* 5. FORMULÁRIOS E CARTÕES */
+/* 6. FORMULÁRIOS E CARTÕES */
 .form-card {
     padding: 40px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/* 6. TABELAS E CENTRALIZAÇÃO DAS AÇÕES */
+/* 7. TABELAS E CENTRALIZAÇÃO DAS AÇÕES */
 .table-container {
     padding: 25px;
 }
@@ -78,13 +97,12 @@ body {
     min-width: 190px !important;
 }
 
-/* Mantém os ícones alinhados entre si no centro perfeito e impede que caiam */
 .styled-table td:last-child .actions {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important; 
     align-items: center !important;
-    flex-wrap: nowrap !important; /* Proíbe estritamente a quebra de linha */
+    flex-wrap: nowrap !important;
     height: 100% !important;
     gap: 10px !important;
     margin: 0 !important;
