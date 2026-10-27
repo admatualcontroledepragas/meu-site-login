@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <!-- CSS BASE EMBUTIDO (Proporções Ajustadas e Fundo Cinza Claro) -->
+    <!-- CSS BASE EMBUTIDO (Proporções Ajustadas para a Nova Imagem) -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
         
@@ -78,17 +78,21 @@
         @media screen and (min-width: 1025px) {
             #login-wrapper { flex-direction: row; }
             
-            /* LADO AZUL: Puxa o conteúdo um pouco para cima */
+            /* LADO AZUL: Centralizado verticalmente */
             .logo-container { 
                 width: 50%; 
                 height: 100vh; 
-                justify-content: flex-start; /* Sai do centro absoluto */
+                justify-content: center; 
                 align-items: center; 
-                padding-top: 18vh; /* Controla a altura a que a logo fica */
+                padding: 40px; 
             }
-            .logo-container img { width: 380px; max-width: 75%; margin-bottom: 10px; }
+            .logo-container img { 
+                width: 260px; /* REDUZIDO PARA A NOVA IMAGEM CORTADA */
+                max-width: 75%; 
+                margin-bottom: 0; 
+            }
             
-            .welcome-text { display: block; margin-top: 20px; }
+            .welcome-text { display: block; margin-top: 35px; z-index: 10; }
             .welcome-text h2 { font-size: 38px; } 
             .welcome-text p { font-size: 20px; }
             
@@ -98,25 +102,23 @@
                 height: 100vh; 
                 border-radius: 0; 
                 padding: 40px; 
-                justify-content: flex-start; /* Sai do centro absoluto */
-                background-color: #f8fafc; /* NOVO: Cinza bem clarinho */
+                justify-content: flex-start; 
+                background-color: #f8fafc; 
             }
             
             #tela-login { 
-                margin: 0 auto; /* Mantém horizontalmente no centro */
+                margin: 0 auto; 
                 max-width: 420px; 
-                margin-top: 10vh; /* Controla a altura a que o título ATUAL desce */
+                margin-top: 10vh; 
             } 
             
             .header { margin-bottom: 40px; }
             .header h1 { font-size: 46px; margin-bottom: 5px; } 
             .header p { font-size: 18px; }
             
-            /* Mais espaço entre os campos de login para respirar */
             .form-group { margin-bottom: 25px; }
             
-            /* Inputs e Botões Gordinhos */
-            .input-login { padding: 18px 45px 18px 20px; font-size: 16px; background-color: #e2e8f0; } /* Escureci o input ligeiramente para contrastar com o novo fundo */
+            .input-login { padding: 18px 45px 18px 20px; font-size: 16px; background-color: #e2e8f0; } 
             .input-login:focus { background-color: #cbd5e1; }
             
             .btn-login { padding: 18px; font-size: 18px; margin-top: 20px; }
