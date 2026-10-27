@@ -528,8 +528,9 @@ document.getElementById("btnAbrirImportacaoVeiculo").addEventListener("click", f
     .then(r=>r.json()).then(d=>{ if (d.status === "sucesso") { baseServicosGeral = d.dados; document.getElementById("modalImportacao").style.display = "flex"; document.getElementById("buscaModal").value = ""; renderizarTabelaModal(baseServicosGeral.slice(0, 10)); atualizarContadorModal(); } else mostrarAlerta("Erro: " + d.mensagem); }).finally(() => { btn.innerHTML = `<span class="material-icons" style="font-size:18px;">cloud_download</span> Importar`; btn.disabled = false; }); 
 });
 
+// AQUI ESTAVA O ERRO (BOTÃO INEXISTENTE NO HTML). Corrigido abaixo!
 function fecharModalImportacao() { document.getElementById("modalImportacao").style.display = "none"; } 
-document.getElementById("btnFecharModalTop").addEventListener("click", fecharModalImportacao); 
+// Removi a linha que chamava o 'btnFecharModalTop' que não existia.
 document.getElementById("btnCancelarModal").addEventListener("click", fecharModalImportacao); 
 
 document.getElementById("buscaModal").addEventListener("input", function(e) { 
