@@ -6,7 +6,7 @@
     <title>Atual Saúde Ambiental - Portal</title>
 
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#172c4c">
+    <meta name="theme-color" content="#14234c">
 
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="icon" type="image/png" href="logo.png">
@@ -14,41 +14,78 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <!-- CSS BASE EMBUTIDO (Garante que o Login nunca desconfigura) -->
+    <!-- CSS BASE EMBUTIDO (Controla a nova versão Desktop Split-Screen e mantém a Mobile) -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
         
         body { background-color: #14234c; color: #333; min-height: 100vh; overflow-x: hidden; }
 
-        /* TELA DE LOGIN */
-        #login-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; }
-        .logo-container { width: 100%; height: 35vh; min-height: 200px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-        .logo-container img { width: 140px; height: auto; }
+        /* =========================================
+           TELA DE LOGIN (Estrutura Base)
+           ========================================= */
+        #login-wrapper { display: flex; width: 100%; min-height: 100vh; }
         
-        .login-card { background-color: white; width: 100%; flex-grow: 1; border-radius: 60px 0 0 0; padding: 40px 30px 20px 30px; display: flex; flex-direction: column; align-items: center; }
-        #tela-login { width: 100%; max-width: 320px; display: flex; flex-direction: column; align-items: center; flex-grow: 1; }
+        .logo-container { display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #14234c; }
+        .logo-container img { height: auto; }
         
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { color: #14234c; font-size: 32px; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
-        .header p { color: #888; font-size: 15px; font-weight: 500; }
+        .welcome-text { text-align: center; color: white; display: none; margin-top: 35px; }
+        .welcome-text h2 { font-size: 32px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .welcome-text p { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        
+        .login-card { background-color: white; display: flex; flex-direction: column; align-items: center; }
+        #tela-login { width: 100%; max-width: 320px; display: flex; flex-direction: column; flex-grow: 1; justify-content: center; }
+        
+        .header { text-align: center; margin-bottom: 35px; }
+        .header h1 { color: #14234c; font-size: 36px; font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+        .header p { color: #9ca3af; font-size: 15px; font-weight: 500; }
         
         form { width: 100%; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: #888; font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; margin-left: 10px; }
+        .form-group label { display: block; color: #9ca3af; font-size: 12px; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; margin-left: 5px; text-transform: uppercase; }
         
         .form-group-input { position: relative; display: flex; align-items: center; }
-        .input-login { width: 100%; padding: 16px 45px 16px 20px; background-color: #e5e7eb; border: none; border-radius: 25px; font-size: 15px; color: #333; outline: none; transition: 0.2s; }
+        
+        /* Inputs formatados como no design */
+        .input-login { width: 100%; padding: 16px 45px 16px 20px; background-color: #e5e7eb; border: none; border-radius: 12px; font-size: 15px; color: #333; outline: none; transition: 0.2s; }
         .input-login:focus { background-color: #d1d5db; }
         .input-login::placeholder { color: #6b7280; }
         
         .btn-toggle-senha { position: absolute; right: 15px; background: transparent; border: none; color: #6b7280; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 5px; }
         
-        .btn-login { background-color: #14234c; color: white; width: 100%; padding: 16px; border: none; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; display: flex; justify-content: center; align-items: center; }
+        /* Botão formatado como no design */
+        .btn-login { background-color: #14234c; color: white; width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; display: flex; justify-content: center; align-items: center; }
         .btn-login:disabled { background-color: #6b7280; cursor: not-allowed; }
         
         #login-error { color: #dc2626; font-size: 13px; font-weight: 600; text-align: center; margin-top: 15px; display: none; }
         
-        .footer-site { margin-top: auto; color: #9ca3af; font-size: 12px; text-align: center; padding-bottom: 10px; width: 100%; }
+        .footer-site { margin-top: auto; color: #9ca3af; font-size: 13px; text-align: center; padding-bottom: 20px; width: 100%; line-height: 1.5; }
+
+        /* =========================================
+           RESPONSIVIDADE (MOBILE VS DESKTOP)
+           ========================================= */
+        
+        /* MOBILE (Mantém o visual antigo com a curva) */
+        @media screen and (max-width: 1024px) {
+            #login-wrapper { flex-direction: column; }
+            .logo-container { width: 100%; height: 35vh; min-height: 200px; flex-shrink: 0; }
+            .logo-container img { width: 140px; }
+            
+            .login-card { width: 100%; flex-grow: 1; border-radius: 60px 0 0 0; padding: 40px 30px 20px 30px; justify-content: flex-start; }
+            #tela-login { margin-top: 0; }
+        }
+
+        /* DESKTOP (Novo layout Split-Screen baseado no seu design) */
+        @media screen and (min-width: 1025px) {
+            #login-wrapper { flex-direction: row; }
+            .logo-container { width: 50%; height: 100vh; }
+            .logo-container img { width: 220px; }
+            
+            /* Textos do lado esquerdo visíveis apenas no Desktop */
+            .welcome-text { display: block; }
+            
+            .login-card { width: 50%; height: 100vh; border-radius: 0; padding: 40px; justify-content: center; }
+            #tela-login { margin: auto; } 
+        }
     </style>
 
     <!-- Chamada dos estilos apenas para o interior do portal -->
@@ -59,10 +96,17 @@
 
     <!-- ÁREA 1: TELA DE LOGIN -->
     <div id="login-wrapper">
+        
+        <!-- Lado Esquerdo (Azul) -->
         <div class="logo-container" id="area-logo">
             <img src="logo.png" alt="Logo Atual">
+            <div class="welcome-text">
+                <h2>Bem-vindo de volta!</h2>
+                <p>Acesse o sistema</p>
+            </div>
         </div>
 
+        <!-- Lado Direito (Branco) -->
         <div class="login-card">
             <div id="tela-login">
                 <div class="header">
@@ -72,9 +116,9 @@
 
                 <form onsubmit="fazerLogin(event)">
                     <div class="form-group">
-                        <label>NOME DE USUÁRIO</label>
+                        <label>NOME</label>
                         <div class="form-group-input">
-                            <input type="text" id="loginUser" class="input-login" placeholder="Usuário" autocomplete="username" required>
+                            <input type="text" id="loginUser" class="input-login" placeholder="Nome" autocomplete="username" required>
                         </div>
                     </div>
 
@@ -93,7 +137,7 @@
                 </form>
 
                 <div class="footer-site">
-                    Gestão Interna &copy; 2026
+                    Desenvolvido por<br>Atual Saúde Ambiental
                 </div>
             </div>
         </div>
@@ -113,7 +157,6 @@
                     <span class="material-icons">home</span>
                     <span class="menu-text">Home</span>
                 </li>
-                <!-- Note a mudança para abrirModulo() -->
                 <li class="menu-item" onclick="abrirModulo('relatorios/index.html', 'Relatórios', this)">
                     <span class="material-icons">description</span>
                     <span class="menu-text">Relatórios</span>
