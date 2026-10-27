@@ -1,42 +1,61 @@
 /* =======================================================
-   ARQUIVO: styledesktop.css (COMPROVANTES DE EXECUÇÃO)
+   ARQUIVO: styledesktop.css (MÓDULO IFRAME - COMPROVANTES)
    (Layout Premium Exclusivo para Ecrãs a partir de 1025px)
    ======================================================= */
 
-/* 1. FUNDO CLARO E AJUSTE DE MARGENS GLOBAIS */
+/* 1. INTEGRAÇÃO COM O IFRAME (Fundo Transparente e Sem Barra Visível) */
 body {
     padding: 0 !important; 
-    background-color: var(--bg-body); 
+    background-color: transparent !important; /* Herda a cor do Portal */
+    overflow-y: auto !important; /* Permite rolar a página com o rato */
+    overflow-x: hidden !important;
+    
+    /* Oculta a barra no Firefox e Edge antigo */
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
+}
+
+/* Oculta a barra no Chrome, Safari e novo Edge */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    background: transparent !important;
 }
 
 #app-container {
     width: 100%;
     max-width: 100% !important; 
     margin: 0;
+    padding-bottom: 50px; /* Espaço extra no fundo */
 }
 
-/* 2. REGRAS DE LARGURA DO CONTEÚDO */
+/* 2. NAVBAR (Ocultada no Desktop pois o Portal já tem a sua) */
+.navbar {
+    display: none !important;
+}
+
+/* 3. REGRAS DE LARGURA DO CONTEÚDO */
 .content {
     max-width: 1200px !important;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
-/* 3. BARRA DE AÇÕES DO DASHBOARD */
+/* 4. BARRA DE AÇÕES DO DASHBOARD */
 .action-bar {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
 }
 
-/* 4. FORMULÁRIOS E CARTÕES */
+/* 5. FORMULÁRIOS E CARTÕES */
 .form-card {
     padding: 40px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/* 5. TABELAS E CENTRALIZAÇÃO DAS AÇÕES */
+/* 6. TABELAS E CENTRALIZAÇÃO DAS AÇÕES */
 .table-container {
     padding: 25px;
 }
@@ -48,7 +67,7 @@ body {
     background-color: #f8fafc; 
 }
 
-/* Centraliza a última célula (Ações) e garante espaço para os 4 botões */
+/* Centraliza a última célula (Ações) e garante espaço para os botões */
 .styled-table th:last-child, 
 .styled-table td:last-child {
     text-align: center !important; 
@@ -69,7 +88,7 @@ body {
     margin: 0 !important;
 }
 
-/* Modal Desktop Ajustes */
+/* 7. MODAL DESKTOP */
 .modal-box {
     padding: 40px;
 }
