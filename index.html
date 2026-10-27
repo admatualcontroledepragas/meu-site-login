@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <!-- CSS BASE EMBUTIDO (Proporções Refinadas) -->
+    <!-- CSS BASE EMBUTIDO (Proporções Ajustadas e Fundo Cinza Claro) -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
         
@@ -28,10 +28,11 @@
         .logo-container { display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #14234c; }
         .logo-container img { height: auto; }
         
-        .welcome-text { text-align: center; color: white; display: none; }
+        .welcome-text { text-align: center; color: white; display: none; margin-top: 15px; }
         .welcome-text h2 { font-size: 32px; font-weight: 700; margin-bottom: 5px; letter-spacing: 0.5px; }
         .welcome-text p { font-size: 18px; font-weight: 400; opacity: 0.9; }
         
+        /* Fundo branco no mobile, será sobrescrito para cinza no desktop */
         .login-card { background-color: white; display: flex; flex-direction: column; align-items: center; }
         #tela-login { width: 100%; max-width: 320px; display: flex; flex-direction: column; flex-grow: 1; justify-content: center; }
         
@@ -45,6 +46,7 @@
         
         .form-group-input { position: relative; display: flex; align-items: center; }
         
+        /* Inputs formatados */
         .input-login { width: 100%; padding: 16px 45px 16px 20px; background-color: #e5e7eb; border: none; border-radius: 12px; font-size: 15px; color: #333; outline: none; transition: 0.2s; }
         .input-login:focus { background-color: #d1d5db; }
         .input-login::placeholder { color: #6b7280; }
@@ -72,53 +74,49 @@
             #tela-login { margin-top: 0; }
         }
 
-        /* DESKTOP (Split-Screen com Ajustes Finos de Proporção) */
+        /* DESKTOP (Split-Screen com Ajustes de Posição) */
         @media screen and (min-width: 1025px) {
             #login-wrapper { flex-direction: row; }
             
-            /* LADO AZUL: Centralizado globalmente, puxado ligeiramente para cima */
+            /* LADO AZUL: Puxa o conteúdo um pouco para cima */
             .logo-container { 
                 width: 50%; 
                 height: 100vh; 
-                justify-content: center; 
+                justify-content: flex-start; /* Sai do centro absoluto */
                 align-items: center; 
+                padding-top: 18vh; /* Controla a altura a que a logo fica */
             }
-            /* Compensar espaço transparente na imagem da logo */
-            .logo-container img { 
-                width: 380px; 
-                max-width: 75%; 
-                margin-top: -8vh; /* Puxa todo o bloco para cima */
-                margin-bottom: -15px; /* Compensa bordas transparentes da logo */
-            }
+            .logo-container img { width: 380px; max-width: 75%; margin-bottom: 10px; }
             
-            .welcome-text { display: block; margin-top: 0; }
+            .welcome-text { display: block; margin-top: 20px; }
             .welcome-text h2 { font-size: 38px; } 
             .welcome-text p { font-size: 20px; }
             
-            /* LADO CINZA: Fundo cinza clarinho e conteúdo centralizado */
+            /* LADO CINZA: Fundo cinza clarinho e conteúdo puxado para baixo */
             .login-card { 
                 width: 50%; 
                 height: 100vh; 
                 border-radius: 0; 
                 padding: 40px; 
-                justify-content: center; 
-                background-color: #f8fafc; 
+                justify-content: flex-start; /* Sai do centro absoluto */
+                background-color: #f8fafc; /* NOVO: Cinza bem clarinho */
             }
             
             #tela-login { 
-                margin: 0 auto; 
+                margin: 0 auto; /* Mantém horizontalmente no centro */
                 max-width: 420px; 
-                margin-top: -5vh; /* Puxa o formulário ligeiramente para cima */
+                margin-top: 10vh; /* Controla a altura a que o título ATUAL desce */
             } 
             
-            .header { margin-bottom: 25px; } /* Reduzido de 40px para 25px para aproximar do form */
+            .header { margin-bottom: 40px; }
             .header h1 { font-size: 46px; margin-bottom: 5px; } 
             .header p { font-size: 18px; }
             
+            /* Mais espaço entre os campos de login para respirar */
             .form-group { margin-bottom: 25px; }
             
             /* Inputs e Botões Gordinhos */
-            .input-login { padding: 18px 45px 18px 20px; font-size: 16px; background-color: #e2e8f0; } 
+            .input-login { padding: 18px 45px 18px 20px; font-size: 16px; background-color: #e2e8f0; } /* Escureci o input ligeiramente para contrastar com o novo fundo */
             .input-login:focus { background-color: #cbd5e1; }
             
             .btn-login { padding: 18px; font-size: 18px; margin-top: 20px; }
