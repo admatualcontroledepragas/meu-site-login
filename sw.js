@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portal-atual-v53'; // Versão atualizada com a integração total
+const CACHE_NAME = 'portal-atual-v54'; // Versão atualizada com a integração total
 
 const urlsToCache = [
   // Ficheiros da Raiz (Portal)
