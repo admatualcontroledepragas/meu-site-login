@@ -3,7 +3,7 @@
    Totalmente Padronizado (Material Icons e UI Unificada)
    ======================================================= */
 
-const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyOZweQZtsb0rJYXDoX7HL0tFG3dO8ZO02pu_yhhS0guV_5d4Q_fIRnPs_Y64GyklrNQA/exec";
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbycL2E2wsmQIB7ta3EyLH8NpzzMo5trtHySkRIsXWIX64OzdOMTcCoxjiDfefhm6EGuMQ/exec";
 
 // ==========================================
 // SISTEMA DE ALERTAS CUSTOMIZADOS
