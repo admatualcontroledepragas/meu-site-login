@@ -7,22 +7,18 @@ body {
     padding-bottom: 20px;
 }
 
-.app-container {
+#app-container {
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 10px 80px 10px;
 }
 
-/* 1. CABEÇALHO E NAVBAR (Restaura a Navbar) */
-.header { display: none; } /* Ocultamos o header antigo em prol da navbar padronizada */
-
+/* 1. CABEÇALHO E NAVBAR */
 .navbar { 
     flex-direction: column; 
     align-items: flex-start; 
     gap: 10px; 
     padding: 15px; 
-    display: flex !important; /* Força a aparição no mobile */
 }
 .navbar div { 
     width: 100%; 
@@ -36,68 +32,56 @@ body {
     justify-content: center; 
 }
 
-/* 2. ABAS E AÇÕES GLOBAIS */
+/* 2. AÇÕES E MÉTRICAS */
 .action-bar {
     flex-direction: column;
     gap: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
-.btn, .btn-action {
+.btn-action {
     width: 100%;
     justify-content: center;
 }
 
-.stats-card {
-    padding: 20px;
-    margin-bottom: 15px;
-}
-
-/* 3. FILTROS E PESQUISA */
-.filtros-container {
-    grid-template-columns: 1fr;
-    gap: 15px;
+/* 3. FILTROS */
+.filtros-card {
     padding: 15px;
 }
-.filtros-container .form-group {
-    width: 100%;
-    margin-bottom: 0;
+.filtros-card .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
 }
-.filtros-container div[style*="display: flex"] {
+.filtros-card div[style*="display: flex"] {
     flex-direction: column;
     width: 100%;
     margin-top: 10px;
 }
-.filtros-container .btn {
+.filtros-card .btn-action {
     width: 100%;
 }
 
-/* 4. FORMULÁRIOS E GRELHAS */
-.form-grid, .grid-2-col, .grid-checkboxes-3 { 
+/* 4. FORMULÁRIOS */
+.form-grid, .grid-checkboxes-3 { 
     grid-template-columns: 1fr !important; 
     gap: 10px; 
 }
-.form-container, .form-card { 
+.form-card { 
     padding: 15px; 
     border-radius: 12px; 
     box-shadow: none; 
     border: 1px solid var(--cor-borda); 
 }
 
-.section {
-    padding: 12px;
+.form-actions { 
+    flex-direction: column; 
+}
+.form-actions button { 
+    width: 100%; 
 }
 
 /* 5. TABELAS TRANSFORMADAS EM CARTÕES (MOBILE) */
-.table-card {
-    padding: 10px 0;
-    background: transparent;
-    box-shadow: none;
-}
-.table-card h2 {
-    font-size: 1.1rem;
-    padding: 0 5px;
-}
+.content { padding: 10px; padding-bottom: 80px; }
 .table-container { 
     background: transparent; 
     border: none; 
@@ -105,16 +89,16 @@ body {
     padding: 0; 
 }
 
-.custom-table, .custom-table thead, .custom-table tbody, .custom-table th, .custom-table td, .custom-table tr {
+.styled-table, .styled-table thead, .styled-table tbody, .styled-table th, .styled-table td, .styled-table tr {
     display: block;
 }
-.custom-table thead tr {
+.styled-table thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
 }
 
-.custom-table tr {
+.styled-table tr {
     background: white;
     border-radius: 12px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
@@ -125,7 +109,7 @@ body {
     box-sizing: border-box;
 }
 
-.custom-table td {
+.styled-table td {
     border: none;
     border-bottom: 1px solid #f3f4f6;
     position: relative;
@@ -139,23 +123,23 @@ body {
     max-width: 100% !important;
 }
 
-/* Rótulos Padronizados para Orçamentos */
-.custom-table td::before {
+/* Rótulos Padronizados */
+.styled-table td::before {
     font-weight: 700; 
     color: var(--cor-texto-secundario); 
     font-size: 11px; 
     text-transform: uppercase;
 }
 
-/* Mapeamento de Colunas */
-.custom-table td:nth-of-type(1)::before { content: "Cliente"; }
-.custom-table td:nth-of-type(2)::before { content: "Data"; }
-.custom-table td:nth-of-type(3)::before { content: "Valor"; }
-.custom-table td:nth-of-type(4)::before { content: "Código"; }
-.custom-table td:nth-of-type(5)::before { display: none; } /* Ações */
+/* Mapeamento de Colunas (Dashboard e Histórico de Orçamentos) */
+.styled-table td:nth-of-type(1)::before { content: "Cliente"; }
+.styled-table td:nth-of-type(2)::before { content: "Data"; }
+.styled-table td:nth-of-type(3)::before { content: "Valor"; }
+.styled-table td:nth-of-type(4)::before { content: "Código"; }
+.styled-table td:nth-of-type(5)::before { display: none; } /* Ações */
 
 /* AÇÕES CENTRALIZADAS PERFEITAMENTE */
-.custom-table td:last-child {
+.styled-table td:last-child {
     border-bottom: none !important;
     display: flex !important;
     width: 100% !important;
@@ -164,38 +148,36 @@ body {
     align-items: center !important;
 }
 
-.acoes, .actions {
+.actions {
     display: flex !important;
     flex-direction: row !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    gap: 20px !important;
+    gap: 15px !important;
     margin: 0 !important;
-    flex-wrap: nowrap !important; 
+    flex-wrap: nowrap !important; /* Proíbe a quebra de linha */
 }
 
-.acoes i, .icon-btn {
+.icon-btn {
     padding: 10px !important;
     font-size: 18px !important;
     background-color: #f8fafc;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-/* 6. MODAIS */
-#modal-sistema > div {
-    width: 95% !important;
-    padding: 20px !important;
+/* 6. AJUSTES DOS MODAIS PARA ECRÃS PEQUENOS */
+.modal-box {
+    width: 95%;
+    max-height: 85vh;
+    padding: 20px;
 }
-#modal-botoes {
+.modal-overlay { 
+    padding-top: 40px; 
+    padding-bottom: 40px; 
+}
+.modal-actions {
     flex-direction: column;
-    gap: 10px !important;
 }
-#modal-botoes button {
+.modal-actions button {
     width: 100%;
 }
