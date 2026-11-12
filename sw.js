@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portal-atual-v56'; // Versão atualizada com a integração total
+const CACHE_NAME = 'portal-atual-v57'; // Versão atualizada com módulo Orçamentos
 
 const urlsToCache = [
   // Ficheiros da Raiz (Portal)
@@ -12,7 +12,9 @@ const urlsToCache = [
   './recibos/stylebase.css',
   './recibos/stylemobile.css',
   './recibos/styledesktop.css',
-  './recibos/script.js',
+  './recibos/script-utils.js',
+  './recibos/script-ui.js',
+  './recibos/script-api.js',
 
   // Módulo: Relatórios e Certificados
   './relatorios/index.html',
@@ -27,6 +29,13 @@ const urlsToCache = [
   './comunicados/stylemobile.css',
   './comunicados/styledesktop.css',
   './comunicados/script.js',
+  
+  // Módulo: Orçamentos (NOVO)
+  './orcamentos/index.html',
+  './orcamentos/stylebase.css',
+  './orcamentos/stylemobile.css',
+  './orcamentos/styledesktop.css',
+  './orcamentos/script.js',
 
   // Módulo: Contratos
   './contratos/index.html',
