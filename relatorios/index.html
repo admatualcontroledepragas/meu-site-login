@@ -101,7 +101,8 @@
               <tbody id="tabelaRecentes">
                 <tr>
                   <td colspan="7" style="text-align: center; color: #6b7280; padding: 25px;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;">
+                    <div
+                      style="display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;">
                       <span>Carregando dados...</span>
                       <div class="spinner"
                         style="width: 18px; height: 18px; border-width: 3px; margin: 0; flex-shrink: 0;">
@@ -192,7 +193,8 @@
               <tbody id="tabelaHistorico">
                 <tr>
                   <td colspan="7" style="text-align: center; color: #6b7280; padding: 25px;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;">
+                    <div
+                      style="display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;">
                       <span>Carregando dados...</span>
                       <div class="spinner"
                         style="width: 18px; height: 18px; border-width: 3px; margin: 0; flex-shrink: 0;">
@@ -333,7 +335,6 @@
   <div id="modal-selecao" class="modal-overlay">
     <div class="modal-box">
       <h3 style="color: var(--primary-color); margin-bottom: 10px;">Novo Registro</h3>
-      <p style="font-size: 14px; color: #6b7280;">Selecione onde deseja salvar:</p>
       <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Selecione onde deseja salvar:</p>
 
       <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
@@ -348,39 +349,41 @@
           onclick="document.getElementById('modal-selecao').style.display='none'">Cancelar</button>
       </div>
     </div>
+  </div>
 
-    <div id="modal-clientes" class="modal-overlay" style="z-index: 4000;">
-      <div class="modal-box md">
-        <div
-          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--cor-borda); padding-bottom: 10px;">
-          <h3 style="color: var(--primary-color); display:flex; align-items:center; gap:8px;"><span
-              class="material-icons">search</span> Importar Cliente</h3>
-          <button class="icon-btn" onclick="document.getElementById('modal-clientes').style.display='none'"><span
-              class="material-icons">close</span></button>
-        </div>
+  <div id="modal-clientes" class="modal-overlay" style="z-index: 4000;">
+    <div class="modal-box md">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--cor-borda); padding-bottom: 10px;">
+        <h3 style="color: var(--primary-color); display:flex; align-items:center; gap:8px;"><span
+            class="material-icons">search</span> Importar Cliente</h3>
+        <button type="button" class="icon-btn"
+          onclick="document.getElementById('modal-clientes').style.display='none'"><span
+            class="material-icons">close</span></button>
+      </div>
 
-        <div class="form-group">
-          <input type="text" id="buscaCliente" class="form-input" placeholder="🔍 Buscar nome..."
-            onkeyup="filtrarListaClientes()">
-        </div>
+      <div class="form-group">
+        <input type="text" id="buscaCliente" class="form-input" placeholder="🔍 Buscar nome..."
+          onkeyup="filtrarListaClientes()">
+      </div>
 
-        <div id="listaClientes" class="list-group-import">
-          <div style="padding:20px; text-align:center; color:#999;">Carregando...</div>
-        </div>
+      <div id="listaClientes" class="list-group-import">
+        <div style="padding:20px; text-align:center; color:#999;">Carregando...</div>
       </div>
     </div>
+  </div>
 
-    <div id="modal-salvando" class="modal-overlay" style="z-index: 4000; display: none;">
-      <div class="modal-box"
-        style="text-align: center; padding: 40px; display: flex; flex-direction: column; align-items: center;">
-        <div class="spinner" style="width: 40px; height: 40px; border-width: 4px; margin-bottom: 20px;"></div>
-        <h3 style="margin: 0; color: var(--primary-color); font-size: 18px;">Salvando Registro...</h3>
-        <p style="color: #6b7280; margin-top: 10px; font-size: 14px;">Gerando PDFs e atualizando a base de dados.</p>
-      </div>
+  <div id="modal-salvando" class="modal-overlay" style="z-index: 4000; display: none;">
+    <div class="modal-box"
+      style="text-align: center; padding: 40px; display: flex; flex-direction: column; align-items: center;">
+      <div class="spinner" style="width: 40px; height: 40px; border-width: 4px; margin-bottom: 20px;"></div>
+      <h3 style="margin: 0; color: var(--primary-color); font-size: 18px;">Salvando Registro...</h3>
+      <p style="color: #6b7280; margin-top: 10px; font-size: 14px;">Gerando PDFs e atualizando a base de dados.</p>
     </div>
+  </div>
 
-    <!-- Ligação para o novo ficheiro JavaScript -->
-    <script src="script.js"></script>
+  <!-- Ligação para o novo ficheiro JavaScript -->
+  <script src="script.js"></script>
 </body>
 
 </html>
