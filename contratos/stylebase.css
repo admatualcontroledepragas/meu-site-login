@@ -249,6 +249,14 @@ body {
     padding: 15px;
     overflow-x: auto;
     border: 1px solid #e5e7eb;
+    width: 100%;
+}
+
+.table-container h3 {
+    margin-top: 0;
+    color: var(--cor-texto);
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 .styled-table {
