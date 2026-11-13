@@ -95,7 +95,7 @@ body {
 
 /* Centraliza a última célula (Ações) e garante espaço para os 4 botões */
 .styled-table th:last-child,
-.styled-table td:last-child {
+.styled-table td:last-child:not([colspan]) {
     text-align: center !important;
     vertical-align: middle !important;
     width: 200px !important;
