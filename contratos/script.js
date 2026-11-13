@@ -13,6 +13,9 @@ let idContratoEditando = null;
 let idContratoExcluindo = null;
 let vistaAtual = 'dashboard'; // Controla onde o usuário está ('dashboard', 'historico' ou 'form')
 
+// Template de loading para usar dentro das tabelas
+const loaderHTML = '<tr><td colspan="6" style="text-align: center; color: #6b7280; padding: 25px;"><div style="display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;"><span>Carregando dados...</span><div class="spinner" style="width: 18px; height: 18px; border-width: 3px; margin: 0; flex-shrink: 0;"></div></div></td></tr>';
+
 // =========================================================================
 // INICIALIZAÇÃO GERAL E LOADERS
 // =========================================================================
@@ -81,7 +84,8 @@ function fecharHistorico() {
 
 // Busca apenas os 5 últimos para a página inicial
 function carregarDashboard() {
-    showLoader("A carregar últimos contratos...");
+    const tbody = document.getElementById('tabelaDashboardBody');
+    if (tbody) tbody.innerHTML = loaderHTML;
 
     fetch(WEB_APP_URL, {
         method: 'POST', mode: 'cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -100,13 +104,13 @@ function carregarDashboard() {
         })
         .catch(e => {
             document.getElementById('tabelaDashboardBody').innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px; color:#ef4444;">Erro de conexão ao buscar os dados.</td></tr>';
-        })
-        .finally(() => { hideLoader(); });
+        });
 }
 
 // Busca toda a base de dados para o histórico e filtros
 function carregarHistorico() {
-    showLoader("A carregar histórico completo...");
+    const tbody = document.getElementById('tabelaHistoricoBody');
+    if (tbody) tbody.innerHTML = loaderHTML;
 
     fetch(WEB_APP_URL, {
         method: 'POST', mode: 'cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -122,8 +126,7 @@ function carregarHistorico() {
         })
         .catch(e => {
             document.getElementById('tabelaHistoricoBody').innerHTML = '<tr><td colspan="6" style="text-align:center; padding:20px; color:#ef4444;">Erro de conexão ao buscar os dados.</td></tr>';
-        })
-        .finally(() => { hideLoader(); });
+        });
 }
 
 // =========================================================================
